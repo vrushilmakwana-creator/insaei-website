@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing — innsæi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── MARKETING PROCESS STEPS — ADAPTIVE ─────────── */
+.mkt-step {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--ink-12);
+}
+.mkt-step:last-child { border-bottom: 1px solid var(--ink-12); }
+.mkt-step-num {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--forest);
+  opacity: .3;
+  line-height: 1;
+}
+.mkt-step-img {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+  border-radius: 2px;
+}
+.mkt-step-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.7) brightness(.88);
+  transition: transform .7s ease;
+}
+.mkt-step-img img:hover { transform: scale(1.04); }
+
+/*
+  Steps 2 & 4 use class img-left.
+  Their DOM order is already: num(col 1) → img(col 2) → text(col 3).
+  This gives the correct layout: [num] [image] [text] with no extra tricks.
+  DO NOT use order:-1 — that pushes the image into the 80px num column.
+*/
+
+/* CHANNELS GRID — 3 columns → 2 → 1 */
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ink-12);
+}
+.channel-cell {
+  background: var(--white);
+  padding: 36px 32px;
+}
+.channel-cell-icon { font-size: 1.4rem; margin-bottom: 16px; line-height: 1; }
+.channel-cell-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.channel-cell-body { font-size: .82rem; font-weight: 300; line-height: 1.9; color: var(--ink-60); }
+
+/* MARKETING PROCESS HEADER GRID */
+.mkt-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 60px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 960px) {
+  .mkt-step {
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+  }
+  .mkt-step-img { display: none; }
+  .mkt-header-grid { grid-template-columns: 1fr; gap: 20px; }
+  .channels-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mkt-step { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .mkt-step-num { font-size: 2.5rem; }
+  .channels-grid { grid-template-columns: 1fr; }
+  .channel-cell { padding: 28px 20px; }
+}
+@media (min-width: 961px) {
+  .mkt-step-img { display: block; }
+}
+
+/* ── STATS BAND — ADAPTIVE ───────────────────────── */
+.stats-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--ink-12);
+}
+.stat-item {
+  background: var(--cream);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat-num em { font-style: normal; color: var(--forest); font-size: 1.5rem; }
+.stat-label { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-60); font-weight: 400; }
+@media (max-width: 900px) { .stats-band { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .stats-band { grid-template-columns: 1fr; } }
+
+/* ── INTRO SECTION ── */
+.mkt-intro-body { max-width: 1200px; margin: 0 auto; padding: 64px 60px; }
+@media (max-width: 768px) { .mkt-intro-body { padding: 48px 24px; } }
+
+/* ── SECTION PADDING ── */
+.section { max-width: 1400px; margin: 0 auto; padding: 80px 60px; }
+@media (max-width: 768px) { .section { padding: 56px 24px; } }
+
+/* ── FOOTER Z-INDEX FIX ── */
+footer { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-logo">INN<em>SÆI</em></div>
+</div>
+
+<!-- TOP RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-ticker">
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Offer Conversion</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+  </div>
+  <div class="ribbon-right">Continuous Process — <span>Outcome Driven</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">INN<em>SÆI</em></a>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="marketing.html" class="active">Marketing</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tel">-</span>
+    <a href="contact.html" class="btn-nav">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="marketing.html" class="active">Marketing</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html" class="mobile-menu-cta">Contact Us</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- INNER HERO -->
+<div class="inner-hero" style="position:relative;overflow:hidden;">
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=60&fit=crop&auto=format" alt="digital marketing"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.45) brightness(.28);z-index:0;"
+    loading="lazy" aria-hidden="true"
+  />
+  <div class="inner-hero-overlay" style="position:relative;z-index:1;">
+    <div class="inner-hero-tag">Digital Division</div>
+    <h1 class="inner-hero-h">Digital <em>Marketing</em></h1>
+  </div>
+</div>
+
+<!-- MARKETING INTRO -->
+<section style="background:var(--white);border-bottom:1px solid var(--ink-12);">
+  <div class="mkt-intro-body">
+    <h2 class="svc-detail-h r d1">A process that<br><em>drives real outcomes.</em></h2>
+    <p class="svc-detail-p r d2" style="margin-top:24px;">At innsæi, our marketing process is not a one-time submission — it is a continuous, daily effort designed to position your profile in front of the right decision-makers. From optimisation to outreach, every step is intentional, structured, and focused on results.</p>
+    <p class="svc-detail-p r d3">We combine profile refinement, multi-platform distribution, direct outreach, interview preparation, and post-placement support — ensuring your journey from application to offer is seamless and effective.</p>
+    <ul class="svc-feature-list r d4">
+      <li>Profile optimisation aligned with industry expectations and ATS systems</li>
+      <li>Daily promotion across 20+ job portals and recruitment channels</li>
+      <li>Targeted outreach to recruiters, hiring managers, and decision-makers</li>
+      <li>Interview preparation with mock sessions, technical drills, and coaching</li>
+      <li>End-to-end support from interview call to offer conversion</li>
+      <li>Post-placement assistance including onboarding and initial transition support</li>
+    </ul>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band r">
+  <div class="stat-item">
+    <span class="stat-num"><span class="counter" data-to="300">0</span><em>%</em></span>
+    <span class="stat-label">Avg. Traffic Growth</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num"><span class="counter" data-to="20">0</span><em>+</em></span>
+    <span class="stat-label">Job Portals Marketed Daily</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num"><span class="counter" data-to="94">0</span><em>%</em></span>
+    <span class="stat-label">Client Retention Rate</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num"><em>Daily</em></span>
+    <span class="stat-label">Candidate Outreach</span>
+  </div>
+</div>
+
+<!-- MARKETING PROCESS -->
+<section style="background:var(--cream);border-bottom:1px solid var(--ink-12);">
+  <div class="section">
+    <div class="sec-label r">The Marketing Process</div>
+    <div class="mkt-header-grid">
+      <h2 class="sec-title r">How we market<br><em>your profile.</em></h2>
+      <p class="r d2" style="font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-60);">Our marketing process is not a one-time submission — it is a continuous, daily effort across multiple platforms and channels designed to get your profile in front of the right decision-makers.</p>
+    </div>
+
+    <!-- Step 1: [num] [text] [image] -->
+    <div class="mkt-step r">
+      <div class="mkt-step-num">01</div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:12px;">Profile Optimisation</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--ink);margin-bottom:16px;">Craft a profile that<br><em>demands attention.</em></h3>
+        <p style="font-size:.88rem;font-weight:300;line-height:1.95;color:var(--ink-60);">Before a single application is submitted, our team audits and rewrites your resume and professional profiles to align with what top U.S. employers actively look for. We highlight the right skills, reframe your experience, and use industry-specific language that gets you past applicant tracking systems (ATS) and into human hands.</p>
+      </div>
+      <div class="mkt-step-img">
+        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=700&q=80&fit=crop&auto=format" alt="Profile optimisation" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- Step 2: [num] [image] [text] — DOM order is already correct, NO order hack needed -->
+    <div class="mkt-step img-left r d1">
+      <div class="mkt-step-num">02</div>
+      <div class="mkt-step-img">
+        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=700&q=80&fit=crop&auto=format" alt="Multi-platform marketing" loading="lazy"/>
+      </div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:12px;">Multi-Platform Distribution</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--ink);margin-bottom:16px;">20+ portals,<br><em>one daily push.</em></h3>
+        <p style="font-size:.88rem;font-weight:300;line-height:1.95;color:var(--ink-60);">Our marketing team submits and actively promotes your profile across 20+ major job portals and recruitment channels every single day. Platforms include LinkedIn, Indeed, Dice, Monster, ZipRecruiter, CareerBuilder, and direct outreach to hiring managers at target companies. We don't wait for opportunities — we create them.</p>
+        <div style="background:rgba(30,80,45,.06);border-left:3px solid var(--forest);padding:16px 20px;margin-top:20px;border-radius:1px;">
+          <p style="font-size:.8rem;font-weight:400;color:var(--forest);line-height:1.7;margin:0;">✦ We stay connected with candidates daily throughout the entire process — proactively updating strategy and reporting progress.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: [num] [text] [image] -->
+    <div class="mkt-step r d2">
+      <div class="mkt-step-num">03</div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:12px;">Targeted Outreach</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--ink);margin-bottom:16px;">Reaching the right<br><em>people directly.</em></h3>
+        <p style="font-size:.88rem;font-weight:300;line-height:1.95;color:var(--ink-60);">Beyond portals, our team conducts targeted outreach to recruiters, talent acquisition teams, and hiring managers at companies aligned with your profile. We research, identify, and contact decision-makers directly — bypassing the noise and getting your profile seen by the people who matter.</p>
+      </div>
+      <div class="mkt-step-img">
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=700&q=80&fit=crop&auto=format" alt="Targeted outreach" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- Step 4: [num] [image] [text] — DOM order is already correct, NO order hack needed -->
+    <div class="mkt-step img-left r d3">
+      <div class="mkt-step-num">04</div>
+      <div class="mkt-step-img">
+        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=700&q=80&fit=crop&auto=format" alt="Interview preparation" loading="lazy"/>
+      </div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:12px;">Interview & Conversion</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--ink);margin-bottom:16px;">From interview call<br><em>to offer letter.</em></h3>
+        <p style="font-size:.88rem;font-weight:300;line-height:1.95;color:var(--ink-60);">When interviews are secured, our team provides dedicated preparation support: company research, role-specific mock sessions, technical drills, and communication coaching. We ensure you walk in confident and walk out with an offer. Our conversion rate from interview to offer is consistently above industry benchmarks.</p>
+      </div>
+    </div>
+
+    <!-- Step 5: [num] [text] [image] -->
+    <div class="mkt-step r d4">
+      <div class="mkt-step-num">05</div>
+      <div>
+        <div style="font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--forest);font-weight:500;margin-bottom:12px;">Post-Placement Support</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;font-weight:300;color:var(--ink);margin-bottom:16px;">We stay until<br><em>you're settled.</em></h3>
+        <p style="font-size:.88rem;font-weight:300;line-height:1.95;color:var(--ink-60);">Our relationship doesn't end at the offer letter. We support you through background verification, onboarding paperwork, and your first 90 days in role. Smooth transitions lead to long-term success — and long-term success is how we measure our own performance.</p>
+      </div>
+      <div class="mkt-step-img">
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&q=80&fit=crop&auto=format" alt="Post-placement support" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS GRID -->
+<section style="background:var(--white);border-bottom:1px solid var(--ink-12);">
+  <div class="section">
+    <div class="sec-label r">The Process</div>
+    <div class="mkt-header-grid">
+      <h2 class="sec-title r">Every step,<br><em>purposefully executed.</em></h2>
+      <p class="r d1" style="font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-60);">Our approach is structured, continuous, and outcome-driven — ensuring your profile is consistently positioned in front of the right opportunities.</p>
+    </div>
+    <div class="channels-grid r d2">
+      <div class="channel-cell">
+        <div class="channel-cell-icon">🧩</div>
+        <div class="channel-cell-title">Profile Optimisation</div>
+        <p class="channel-cell-body">We audit and refine your resume and profiles to align with industry expectations, highlight key strengths, and ensure compatibility with applicant tracking systems.</p>
+      </div>
+      <div class="channel-cell">
+        <div class="channel-cell-icon">🌐</div>
+        <div class="channel-cell-title">Multi-Platform Distribution</div>
+        <p class="channel-cell-body">Your profile is actively promoted across 20+ major job portals and recruitment platforms daily, ensuring consistent visibility and reach.</p>
+      </div>
+      <div class="channel-cell">
+        <div class="channel-cell-icon">🎯</div>
+        <div class="channel-cell-title">Targeted Outreach</div>
+        <p class="channel-cell-body">We directly connect with recruiters, hiring managers, and decision-makers to ensure your profile reaches the people who matter most.</p>
+      </div>
+      <div class="channel-cell">
+        <div class="channel-cell-icon">🤝</div>
+        <div class="channel-cell-title">Interview Preparation</div>
+        <p class="channel-cell-body">We prepare you with mock sessions, technical practice, and company insights so you can confidently convert interviews into offers.</p>
+      </div>
+      <div class="channel-cell">
+        <div class="channel-cell-icon">📄</div>
+        <div class="channel-cell-title">Offer Conversion</div>
+        <p class="channel-cell-body">From interview to offer, we guide you through every step, ensuring smooth communication and successful outcomes.</p>
+      </div>
+      <div class="channel-cell">
+        <div class="channel-cell-icon">🚀</div>
+        <div class="channel-cell-title">Post-Placement Support</div>
+        <p class="channel-cell-body">We continue supporting you after placement — from onboarding to your initial transition — ensuring long-term success in your new role.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left rl">
+      <div class="cta-tag">Grow Online</div>
+      <h2 class="cta-h">Your recruiters<br>are already<br><em>searching.</em></h2>
+    </div>
+    <div class="cta-right rr">
+      <p class="cta-body">Every day without a strong digital strategy is a day your competitors gain ground. Let's close that gap — <strong>starting with a free digital audit.</strong></p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-cta-a">Free Digital Audit</a>
+        <a href="services.html" class="btn-cta-b">All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <span class="ft-brand-logo">INN<em>SÆI</em></span>
+      <span class="ft-brand-sub">IT Recruitment · Non-IT Recruitment · Est. 2024</span>
+      <p class="ft-brand-copy">A global technology &amp; talent partner for candidates who believe their most important chapter is still ahead of them.</p>
+    </div>
+    <div>
+      <span class="ft-col-h">Navigate</span>
+      <ul class="ft-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="marketing.html">Marketing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="ft-col-h">Services</span>
+      <ul class="ft-list">
+        <li><a href="marketing.html">Profile Optimisation</a></li>
+        <li><a href="marketing.html">Multi-Platform Distribution</a></li>
+        <li><a href="marketing.html">Targeted Outreach</a></li>
+        <li><a href="services.html">Interview Preparation</a></li>
+        <li><a href="services.html">Offer Conversion</a></li>
+        <li><a href="services.html">Post-Placement Support</a></li>
+        <li><a href="services.html">End-to-End Process</a></li>
+      </ul>
+    </div>
+    <div class="ft-contact">
+      <span class="ft-col-h">Contact</span>
+      <strong>-</strong>
+      <a href="tel:">-</a>
+      <strong style="margin-top:16px;">Email</strong>
+      <a href="mailto:durgeshbarot07@gmail.com">durgeshbarot07@gmail.com</a>
+      <strong style="margin-top:16px;">Address</strong>
+      <a href="contact.html">-</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <p class="ft-copy-text">© <span id="year"></span> <em>INNSÆI</em> All rights reserved.</p>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <div class="ft-social">
+      <a href="https://www.linkedin.com/in/durgesh-brahmbhatt-02989025a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="ft-soc" title="LinkedIn">in</a>
+      <a href="#" class="ft-soc">𝕏</a>
+      <a href="#" class="ft-soc">fb</a>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

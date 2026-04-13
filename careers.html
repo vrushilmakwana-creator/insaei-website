@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers & Open Roles — innsæi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-logo">INN<em>SÆI</em></div>
+</div>
+
+<!-- TOP RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-ticker">
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Offer Conversion</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+  </div>
+  <div class="ribbon-right">Continuous Process — <span>Outcome Driven</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">INN<em>SÆI</em></a>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="marketing.html">Marketing</a>
+    <a href="careers.html" class="active">Careers</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tel">-</span>
+    <a href="contact.html" class="btn-nav">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="marketing.html">Marketing</a>
+  <a href="careers.html" class="active">Careers</a>
+  <a href="contact.html" class="mobile-menu-cta">Contact Us</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- INNER HERO -->
+<div class="inner-hero" style="position:relative;overflow:hidden;">
+  <img src="https://images.unsplash.com/photo-1531498860502-7c67cf02f657?w=800&q=85&fit=crop&auto=format" alt="Career opportunities"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.5) brightness(.35);z-index:0;"
+    loading="lazy"
+  />
+  
+  <div class="inner-hero-overlay" style="position:relative;z-index:1;">
+    <div class="inner-hero-tag">Open Roles</div>
+    <h1 class="inner-hero-h">Find your dream<br><em>career here.</em></h1>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section style="background:var(--white);border-bottom:1px solid var(--ink-12);">
+  <div style="max-width:1400px;margin:0 auto;padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;">
+    <div class="rl">
+      <div class="sec-label">For Job Seekers</div>
+      <h2 class="sec-title">Top talent.<br><em>Placed with purpose.</em></h2>
+    </div>
+    <div class="rr">
+      <p style="font-size:.92rem;font-weight:300;line-height:1.95;color:var(--ink-60);margin-bottom:28px;">We know you have unique goals and needs as a job seeker in today's market. innsæi provides a variety of job options — from Contract W2 and C2H to permanent full-time roles — across IT, security, and digital disciplines.</p>
+      <p style="font-size:.92rem;font-weight:300;line-height:1.95;color:var(--ink-60);">Browse the roles below or <a href="contact.html" style="color:var(--forest);text-decoration:underline;text-underline-offset:3px;">submit your profile</a> for our talent database. We actively recruit for positions that never get publicly posted.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOB LISTINGS -->
+<section class="careers-section">
+  <div class="section">
+    <div class="sec-label r">Current Openings</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:0;">
+      <h2 class="sec-title r">Browse all<br><em>open roles.</em></h2>
+      <p class="r d2" style="font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-60);">Roles span three divisions: IT Recruitment, Security, and Digital. Filter by division or engagement type.</p>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar" style="margin-top:48px;">
+      <button class="filter-btn active" data-filter="all">All Roles</button>
+      <button class="filter-btn" data-filter="it">IT & Tech</button>
+      <button class="filter-btn" data-filter="security">Security</button>
+      <button class="filter-btn" data-filter="digital">Digital</button>
+      <button class="filter-btn" data-filter="fulltime">Full-Time</button>
+      <button class="filter-btn" data-filter="contract">Contract</button>
+    </div>
+
+    <!-- JOBS -->
+    <div class="job-list" id="jobList">
+
+      <div class="job-row" data-category="it fulltime" onclick="openModal('Senior Software Engineer', 'IT & Technology · Full-Time · Remote / Hybrid')">
+        <div>
+          <div class="job-title">Senior Software Engineer</div>
+          <div style="margin-top:4px;"><span class="job-division">IT & Tech</span></div>
+        </div>
+        <div class="job-dept">Engineering</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="it contract" onclick="openModal('DevOps Engineer (Contract W2)', 'IT & Technology · Contract W2 · Remote')">
+        <div>
+          <div class="job-title">DevOps Engineer</div>
+          <div style="margin-top:4px;"><span class="job-division">IT & Tech</span></div>
+        </div>
+        <div class="job-dept">Infrastructure</div>
+        <div class="job-type">Contract W2</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="it fulltime" onclick="openModal('Data Analyst', 'IT & Technology · Full-Time · On-site / Hybrid')">
+        <div>
+          <div class="job-title">Data Analyst</div>
+          <div style="margin-top:4px;"><span class="job-division">IT & Tech</span></div>
+        </div>
+        <div class="job-dept">Analytics</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="it contract" onclick="openModal('QA Tester (C2H)', 'IT & Technology · Contract to Hire · Remote')">
+        <div>
+          <div class="job-title">QA Tester</div>
+          <div style="margin-top:4px;"><span class="job-division">IT & Tech</span></div>
+        </div>
+        <div class="job-dept">Quality Assurance</div>
+        <div class="job-type">C2H</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="it fulltime" onclick="openModal('Full-Stack Developer', 'IT & Technology · Full-Time · Remote')">
+        <div>
+          <div class="job-title">Full-Stack Developer</div>
+          <div style="margin-top:4px;"><span class="job-division">IT & Tech</span></div>
+        </div>
+        <div class="job-dept">Engineering</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="security fulltime" onclick="openModal('Security Monitoring Operator', 'Security Division · Full-Time · On-site')">
+        <div>
+          <div class="job-title">Security Monitoring Operator</div>
+          <div style="margin-top:4px;"><span class="job-division">Security</span></div>
+        </div>
+        <div class="job-dept">Operations</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="security contract" onclick="openModal('Alarm Response Specialist', 'Security Division · Contract · On-site')">
+        <div>
+          <div class="job-title">Alarm Response Specialist</div>
+          <div style="margin-top:4px;"><span class="job-division">Security</span></div>
+        </div>
+        <div class="job-dept">Response Team</div>
+        <div class="job-type">Contract</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="security fulltime" onclick="openModal('Security Consultant', 'Security Division · Full-Time · On-site / Travel')">
+        <div>
+          <div class="job-title">Security Consultant</div>
+          <div style="margin-top:4px;"><span class="job-division">Security</span></div>
+        </div>
+        <div class="job-dept">Consulting</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="digital fulltime" onclick="openModal('SEO Strategist', 'Digital Division · Full-Time · Remote')">
+        <div>
+          <div class="job-title">SEO Strategist</div>
+          <div style="margin-top:4px;"><span class="job-division">Digital</span></div>
+        </div>
+        <div class="job-dept">Marketing</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="digital contract" onclick="openModal('PPC Campaign Manager', 'Digital Division · Contract · Remote')">
+        <div>
+          <div class="job-title">PPC Campaign Manager</div>
+          <div style="margin-top:4px;"><span class="job-division">Digital</span></div>
+        </div>
+        <div class="job-dept">Paid Media</div>
+        <div class="job-type">Contract</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="digital fulltime" onclick="openModal('UI/UX Designer', 'Digital Division · Full-Time · Remote / Hybrid')">
+        <div>
+          <div class="job-title">UI/UX Designer</div>
+          <div style="margin-top:4px;"><span class="job-division">Digital</span></div>
+        </div>
+        <div class="job-dept">Design</div>
+        <div class="job-type green">Full-Time</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+      <div class="job-row" data-category="digital contract" onclick="openModal('Web Developer (Frontend)', 'Digital Division · Contract to Hire · Remote')">
+        <div>
+          <div class="job-title">Frontend Web Developer</div>
+          <div style="margin-top:4px;"><span class="job-division">Digital</span></div>
+        </div>
+        <div class="job-dept">Development</div>
+        <div class="job-type">C2H</div>
+        <div class="job-arrow">↗</div>
+      </div>
+
+    </div><!-- end job-list -->
+
+    <p class="no-match" id="noMatch">No roles matching your filter right now. <a href="contact.html" style="color:var(--forest);">Submit your profile →</a></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left rl">
+      <div class="cta-tag">Can't Find Your Role?</div>
+      <h2 class="cta-h">
+        Send us<br>
+        your <em>profile.</em>
+      </h2>
+    </div>
+    <div class="cta-right rr">
+      <p class="cta-body">Many of our best placements come from candidates who submit their profile before any formal opening exists. We keep your details on file and <strong>reach out when the right role appears.</strong></p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-cta-a">Submit Your Profile</a>
+        <a href="recruitment.html" class="btn-cta-b">Learn About Our Process</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <span class="ft-brand-logo">INN<em>SÆI</em></span>
+      <span class="ft-brand-sub">IT Recruitment · Non-IT Recruitment · Est. 2024</span>
+      <p class="ft-brand-copy">A global technology &amp; talent partner for candidates who believe their most important chapter is still ahead of them.</p>
+    </div>
+    <div>
+      <span class="ft-col-h">Navigate</span>
+      <ul class="ft-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="marketing.html">Marketing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="ft-col-h">Services</span>
+      <ul class="ft-list">
+        <li><a href="services.html">Profile Optimisation</a></li>
+        <li><a href="services.html">Multi-Platform Distribution</a></li>
+        <li><a href="services.html">Targeted Outreach</a></li>
+        <li><a href="services.html">Interview Preparation</a></li>
+        <li><a href="services.html">Offer Conversion</a></li>
+        <li><a href="services.html">Post-Placement Support</a></li>
+        <li><a href="services.html">End-to-End Process</a></li>
+      </ul>
+    </div>
+    <div class="ft-contact">
+      <span class="ft-col-h">Contact</span>
+      <strong>-</strong>
+      <a href="tel:">-</a>
+      <strong style="margin-top:16px;">Email</strong>
+      <a href="mailto:durgeshbarot07@gmail.com">durgeshbarot07@gmail.com</a>
+      <strong style="margin-top:16px;">Address</strong>
+      <a href="contact.html">-</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <p class="ft-copy-text">&copy; <span id="year"></span> <em>INNSÆI</em> All rights reserved.</p>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <div class="ft-social">
+      <a href="https://www.linkedin.com/in/durgesh-brahmbhatt-02989025a?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" class="ft-soc" title="LinkedIn">in</a>
+      <a href="#" class="ft-soc">𝕏</a>
+      <a href="#" class="ft-soc">fb</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- APPLY MODAL -->
+<div class="apply-modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="apply-modal">
+    <button class="modal-close" onclick="closeModal(null, true)">✕</button>
+    <div class="modal-title" id="modalTitle">Job Title</div>
+    <div class="modal-role" id="modalRole">Division · Type · Location</div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input class="form-input" type="text" placeholder="Your full name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" placeholder="your@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" type="tel" placeholder="+1 (000) 000-0000">
+    </div>
+    <div class="form-group">
+      <label class="form-label">LinkedIn Profile</label>
+      <input class="form-input" type="url" placeholder="linkedin.com/in/yourprofile">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Cover Message</label>
+      <textarea class="form-textarea" placeholder="Tell us why you're the right fit for this role..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitApp()">Submit Application</button>
+  </div>
+</div>
+
+<script src="site.js"></script>
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    let visible = 0;
+    document.querySelectorAll('.job-row').forEach(row => {
+      const cats = row.dataset.category || '';
+      const show = f === 'all' || cats.includes(f);
+      row.style.display = show ? 'grid' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('noMatch').style.display = visible === 0 ? 'block' : 'none';
+  });
+});
+
+/* MODAL */
+function openModal(title, role) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalRole').textContent = role;
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e, force) {
+  if (force || (e && e.target === document.getElementById('modalBg'))) {
+    document.getElementById('modalBg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+function submitApp() {
+  alert('Thank you for your application! Our team will be in touch within 2 business days.');
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(null, true); });
+</script>
+</body>
+</html>

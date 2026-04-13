@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odoo Deployment Guide — innsæi Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111009;
+    --cream: #f7f5f0;
+    --forest: #1a4d3a;
+    --sage: #246348;
+    --warm: #FFC107;
+    --paper: #fdfcf8;
+    --ink-60: rgba(17,16,9,.6);
+    --ink-12: rgba(17,16,9,.12);
+    --serif: 'Cormorant', Georgia, serif;
+    --body: 'Outfit', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--body);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .guide-header {
+    background: var(--forest);
+    padding: 60px 60px 48px;
+    border-bottom: 3px solid var(--warm);
+  }
+  .guide-header h1 {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .guide-header h1 em { color: var(--warm); font-style: italic; }
+  .guide-header p {
+    color: rgba(255,255,255,.65);
+    font-size: .88rem;
+    font-weight: 300;
+    max-width: 600px;
+  }
+  .guide-header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,193,7,.15);
+    border: 1px solid rgba(255,193,7,.35);
+    color: var(--warm);
+    font-size: .65rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 20px;
+  }
+  .guide-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+  .phase {
+    margin-bottom: 60px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .phase-num {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    background: var(--forest);
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .phase-title span {
+    display: block;
+    font-family: var(--body);
+    font-size: .7rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .steps-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .step {
+    display: flex;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--paper);
+    border: 1px solid var(--ink-12);
+    position: relative;
+  }
+  .step::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--forest);
+  }
+  .step-num {
+    flex-shrink: 0;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--forest);
+    font-style: italic;
+    min-width: 24px;
+    margin-top: 2px;
+  }
+  .step-body h4 {
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .step-body p {
+    font-size: .82rem;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.8;
+  }
+  .step-body code {
+    display: inline-block;
+    background: rgba(17,16,9,.06);
+    border: 1px solid var(--ink-12);
+    padding: 2px 8px;
+    font-size: .78rem;
+    font-family: monospace;
+    color: var(--forest);
+    border-radius: 2px;
+    margin: 2px 2px;
+  }
+  .step-body .files {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .step-body .file-tag {
+    background: var(--forest);
+    color: #fff;
+    font-size: .65rem;
+    letter-spacing: .12em;
+    padding: 4px 10px;
+    font-weight: 400;
+  }
+  .note-box {
+    background: rgba(255,193,7,.08);
+    border: 1px solid rgba(255,193,7,.3);
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-size: .82rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .note-box strong { color: var(--forest); }
+  .warn-box {
+    background: rgba(160,0,0,.04);
+    border: 1px solid rgba(160,0,0,.15);
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-size: .82rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .warn-box strong { color: #8a0000; }
+  .good-box {
+    background: rgba(26,77,58,.05);
+    border: 1px solid rgba(26,77,58,.2);
+    padding: 18px 22px;
+    margin: 20px 0;
+    font-size: .82rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .good-box strong { color: var(--forest); }
+  .files-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: .82rem;
+  }
+  .files-table th {
+    background: var(--forest);
+    color: #fff;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .files-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--ink-12);
+    color: var(--ink-60);
+  }
+  .files-table tr:last-child td { border-bottom: none; }
+  .files-table td:first-child { font-family: monospace; color: var(--forest); font-weight: 500; }
+  .files-table tr:nth-child(even) td { background: rgba(17,16,9,.02); }
+
+  .final-note {
+    background: var(--forest);
+    color: #fff;
+    padding: 36px 40px;
+    margin-top: 60px;
+  }
+  .final-note h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 12px;
+    color: var(--warm);
+  }
+  .final-note p {
+    font-size: .82rem;
+    font-weight: 300;
+    color: rgba(255,255,255,.7);
+    line-height: 1.9;
+  }
+
+  @media (max-width: 600px) {
+    .guide-header { padding: 40px 24px 36px; }
+    .guide-body { padding: 36px 20px 60px; }
+    .guide-header h1 { font-size: 2rem; }
+    .step { flex-direction: column; gap: 8px; padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="badge">🚀 Deployment Guide</div>
+  <h1>Hosting <em>innsæi</em><br>on Odoo Website Builder</h1>
+  <p>Step-by-step instructions to get your website live on Odoo's free plan in under 30 minutes. No coding experience required.</p>
+</div>
+
+<div class="guide-body">
+
+  <!-- FILES OVERVIEW -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">★</div>
+      <div class="phase-title">
+        <span>Before You Start</span>
+        Files in Your Package
+      </div>
+    </div>
+
+    <table class="files-table">
+      <tr><th>File</th><th>Page</th><th>Action</th></tr>
+      <tr><td>index.html</td><td>Homepage</td><td>Upload as Home page</td></tr>
+      <tr><td>about.html</td><td>About Us</td><td>Upload as "About" page</td></tr>
+      <tr><td>services.html</td><td>Services</td><td>Upload as "Services" page</td></tr>
+      <tr><td>recruitment.html</td><td>Recruitment</td><td>Upload as "Recruitment" page</td></tr>
+      <tr><td>marketing.html</td><td>Marketing</td><td>Upload as "Marketing" page</td></tr>
+      <tr><td>careers.html</td><td>Careers</td><td>Upload as "Careers" page</td></tr>
+      <tr><td>contact.html</td><td>Contact Us</td><td>Upload as "Contact" page</td></tr>
+      <tr><td>styles.css</td><td>Stylesheet</td><td>Upload as static attachment</td></tr>
+      <tr><td>site.js</td><td>JavaScript</td><td>Upload as static attachment</td></tr>
+      <tr><td>photo1.jpg, photo2.jpg, durgesh.png</td><td>Images</td><td>Upload as static attachments</td></tr>
+    </table>
+
+    <div class="note-box">
+      <strong>Note:</strong> Odoo's free website builder does not support PHP files. Your contact form now uses Odoo's own built-in form submission system (<code>/website/form/crm.lead</code>). The <code>contact-process.php</code> file has been removed — you do not need it.
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">1</div>
+      <div class="phase-title">
+        <span>Phase One</span>
+        Set Up Your Odoo Account & Website
+      </div>
+    </div>
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">1.</span>
+        <div class="step-body">
+          <h4>Go to odoo.com and sign up / log in</h4>
+          <p>Visit <code>odoo.com</code> → click <code>Start for Free</code> or <code>Sign In</code>. If new, choose the free plan. You will land on your Odoo dashboard.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2.</span>
+        <div class="step-body">
+          <h4>Activate the Website app</h4>
+          <p>From the main menu, go to <code>Apps</code> → search for <code>Website</code> → click <code>Activate</code>. This is free and included in every Odoo plan.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3.</span>
+        <div class="step-body">
+          <h4>Open the Website Editor</h4>
+          <p>Click the <code>Website</code> icon on your dashboard, then click <code>Go to Website</code>. You'll land on your Odoo website editor. You can now start adding content.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">2</div>
+      <div class="phase-title">
+        <span>Phase Two</span>
+        Upload Static Files (CSS, JS, Images)
+      </div>
+    </div>
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">1.</span>
+        <div class="step-body">
+          <h4>Open Attachments Manager</h4>
+          <p>In Odoo backend, go to <code>Website</code> → <code>Configuration</code> → <code>Attachments</code>. This is where you upload static files.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2.</span>
+        <div class="step-body">
+          <h4>Upload all static assets</h4>
+          <p>Click <code>Upload</code> and select these files one by one. Once uploaded, click on each file to copy its <strong>public URL</strong> — you will need these URLs for the next phase.</p>
+          <div class="files">
+            <span class="file-tag">styles.css</span>
+            <span class="file-tag">site.js</span>
+            <span class="file-tag">photo1.jpg</span>
+            <span class="file-tag">photo2.jpg</span>
+            <span class="file-tag">durgesh.png</span>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3.</span>
+        <div class="step-body">
+          <h4>Note the public URL pattern</h4>
+          <p>Odoo usually serves uploaded files at a URL like:<br>
+          <code>/web/image/ir.attachment/[ID]/datas/filename.ext</code><br>
+          or sometimes directly at <code>/web/content/[ID]?filename=styles.css</code>.<br>
+          Write these URLs down — you'll replace the <code>href="styles.css"</code> and <code>src="site.js"</code> references in each HTML page.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="warn-box">
+      <strong>Important:</strong> In each HTML file, the &lt;head&gt; has <code>href="styles.css"</code> and &lt;body&gt; has <code>src="site.js"</code>. Before pasting the HTML into Odoo, replace these with the full Odoo attachment URLs you noted above. Same for <code>photo1.jpg</code> and <code>photo2.jpg</code>.
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">3</div>
+      <div class="phase-title">
+        <span>Phase Three</span>
+        Create Pages in Odoo Website Builder
+      </div>
+    </div>
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">1.</span>
+        <div class="step-body">
+          <h4>Create a new page in Odoo</h4>
+          <p>Go to your Odoo website editor → click <code>Pages</code> (top bar) → <code>New Page</code>. Give it the right name (e.g., "Home", "About", "Services", etc.).</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2.</span>
+        <div class="step-body">
+          <h4>Switch to HTML / Code view</h4>
+          <p>In the page editor, click the <code>&lt;/&gt;</code> or <code>Code</code> button in the Odoo toolbar (usually top-right). This opens the HTML editor.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3.</span>
+        <div class="step-body">
+          <h4>Paste your HTML page content</h4>
+          <p>Open your <code>.html</code> file in a text editor (Notepad, VSCode, etc.). Select all (<code>Ctrl+A</code>) → Copy → Paste into Odoo's HTML editor. Then click <code>Save</code>.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">4.</span>
+        <div class="step-body">
+          <h4>Repeat for every page</h4>
+          <p>Do this for all 7 pages: <code>index.html</code> (set as Homepage), <code>about.html</code>, <code>services.html</code>, <code>recruitment.html</code>, <code>marketing.html</code>, <code>careers.html</code>, and <code>contact.html</code>.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">5.</span>
+        <div class="step-body">
+          <h4>Set index.html as the Homepage</h4>
+          <p>Go to <code>Pages</code> → find your "Home" page → click the <code>⋮</code> (three dots) → <code>Set as Homepage</code>. This ensures your domain root (<code>/</code>) points to your main page.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 4 — CONTACT FORM -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">4</div>
+      <div class="phase-title">
+        <span>Phase Four — Critical</span>
+        Setting Up the Contact Form in Odoo
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>How it works:</strong> Your contact form now submits to Odoo's own endpoint <code>/website/form/crm.lead</code>. This creates a <strong>CRM Lead</strong> directly inside Odoo every time someone fills in the form — no PHP needed. You can then view, reply, and manage enquiries from the Odoo CRM module. The form's design/styling remains 100% yours.
+    </div>
+
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">1.</span>
+        <div class="step-body">
+          <h4>Activate the CRM App in Odoo</h4>
+          <p>Go to <code>Apps</code> → search <code>CRM</code> → click <code>Activate</code>. This is required so Odoo knows where to store form submissions. Free plan includes CRM.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2.</span>
+        <div class="step-body">
+          <h4>Make sure the Website Form module is enabled</h4>
+          <p>In Odoo, go to <code>Website</code> → <code>Configuration</code> → <code>Settings</code>. Scroll to the <strong>Privacy</strong> section. Ensure <code>Use Custom Privacy Policy</code> is off (or set as needed). The form submission feature is enabled by default when CRM is installed.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3.</span>
+        <div class="step-body">
+          <h4>Test the contact form after going live</h4>
+          <p>Once your <code>contact.html</code> page is live on Odoo, fill in the form and submit it. Then go to <code>CRM</code> → <code>Leads / Pipeline</code> — you should see a new lead created with all the submitted details.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">4.</span>
+        <div class="step-body">
+          <h4>View & reply to messages via Odoo CRM</h4>
+          <p>Click any lead → use the <strong>Chatter</strong> (message box at the bottom of the lead page) to send replies. You can also set up automated email notifications via <code>CRM</code> → <code>Configuration</code> → <code>Stages</code>.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">5.</span>
+        <div class="step-body">
+          <h4>If the form doesn't work (fallback)</h4>
+          <p>Some Odoo free plans restrict form endpoints. If you see an error, the safest free fallback is <strong>Formspree</strong> (<code>formspree.io</code>). Sign up free → create a form → replace <code>action="/website/form/crm.lead"</code> with your Formspree endpoint URL. Everything else stays the same — styles, layout, JS validation all continue to work perfectly.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">5</div>
+      <div class="phase-title">
+        <span>Phase Five</span>
+        Domain, SEO & Final Checks
+      </div>
+    </div>
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">1.</span>
+        <div class="step-body">
+          <h4>Connect your custom domain</h4>
+          <p>In Odoo, go to <code>Website</code> → <code>Configuration</code> → <code>Settings</code> → <code>Domain Name</code>. Enter your domain (e.g., <code>innsaei.com</code>). Then update your domain registrar's DNS: add a <code>CNAME</code> record pointing to your Odoo subdomain or an <code>A</code> record to Odoo's IP (shown on the settings page).</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">2.</span>
+        <div class="step-body">
+          <h4>Set page meta titles and descriptions</h4>
+          <p>In the Odoo page editor for each page, click <code>Pages</code> → <code>Properties</code> → fill in the <strong>Title</strong> and <strong>Description</strong> fields. This helps Google find your website.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">3.</span>
+        <div class="step-body">
+          <h4>Check all pages look correct on mobile</h4>
+          <p>In the Odoo editor, click the phone icon to preview mobile view. All pages have been built with full mobile responsiveness — hamburger menu, stacked layouts, and proper font scaling on small screens.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">4.</span>
+        <div class="step-body">
+          <h4>Publish all pages</h4>
+          <p>Each page is unpublished (draft) by default. In the editor, toggle the <code>Unpublished → Published</code> switch (top-right) for each page. You must publish all 7 pages to make them live.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="good-box">
+      <strong>✓ You're done!</strong> Your innsæi website is now live on Odoo. Every contact form submission will appear as a CRM Lead in your Odoo backend, where you can manage, follow up, and communicate with prospects directly using Odoo's built-in messaging system.
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num">✦</div>
+      <div class="phase-title">
+        <span>Quick Reference</span>
+        What Was Changed in Your Files
+      </div>
+    </div>
+    <ul class="steps-list">
+      <li class="step">
+        <span class="step-num">→</span>
+        <div class="step-body">
+          <h4>Renamed files</h4>
+          <p><code>staffing.html</code> → <code>recruitment.html</code> &nbsp;·&nbsp; <code>digital.html</code> → <code>marketing.html</code></p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">→</span>
+        <div class="step-body">
+          <h4>Removed files</h4>
+          <p><code>security.html</code>, <code>contact-process.php</code>, <code>profile.php</code>, <code>contact.html.new</code>, <code>TODO.md</code> — all removed. Not needed for Odoo.</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">→</span>
+        <div class="step-body">
+          <h4>Header/Nav changes (all pages)</h4>
+          <p>Added <strong>Home</strong> link · Updated Recruitment &amp; Marketing links · Phone number replaced with <code>-</code> · Hamburger menu added for mobile</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">→</span>
+        <div class="step-body">
+          <h4>Full mobile responsiveness</h4>
+          <p>Hamburger menu with smooth slide animation · Stacked layouts on phones · Touch-friendly tap targets · Overlay closes menu on outside tap</p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-num">→</span>
+        <div class="step-body">
+          <h4>Contact form</h4>
+          <p>Form action changed to <code>/website/form/crm.lead</code> (Odoo's endpoint). All your custom CSS, layout, and JS validation is 100% intact. Submissions create CRM Leads in Odoo automatically.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="final-note">
+    <h3>Need help? Quick contacts.</h3>
+    <p>
+      <strong style="color:var(--warm);">Odoo Docs:</strong> <code style="color:rgba(255,255,255,.8);">odoo.com/documentation</code><br>
+      <strong style="color:var(--warm);">Odoo Forum:</strong> <code style="color:rgba(255,255,255,.8);">odoo.com/forum</code><br>
+      <strong style="color:var(--warm);">Formspree (fallback):</strong> <code style="color:rgba(255,255,255,.8);">formspree.io</code> — free, 50 submissions/month, zero setup<br><br>
+      If you get stuck, the most common fix is ensuring <strong>CRM is activated</strong> and pages are <strong>Published</strong> in Odoo.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

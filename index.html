@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>innsæi — IT recruitment, Security & Digital Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── IMAGE FEATURE STRIP ─────────────────────────── */
+#img-feature {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: var(--ink, #111);
+}
+.img-feature-cell {
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  cursor: pointer;
+}
+.img-feature-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: saturate(0.55) brightness(0.55);
+  transition: transform 0.7s ease, filter 0.5s ease;
+}
+.img-feature-cell:hover img { transform: scale(1.06); filter: saturate(0.75) brightness(0.65); }
+.img-feature-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 28px 32px;
+  background: linear-gradient(to top, rgba(10,10,8,.78) 0%, rgba(10,10,8,.15) 55%, transparent 100%);
+  pointer-events: none;
+}
+.img-feature-label { font-family:'Outfit',sans-serif; font-size:.55rem; font-weight:400; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:8px; }
+.img-feature-title { font-family:'Cormorant',serif; font-size:1.7rem; font-weight:400; line-height:1.2; color:#fff; }
+.img-feature-title em { font-style:italic; color:rgba(255,255,255,.75); }
+
+/* ── SERVICES TABLE — FULLY ADAPTIVE ────────────── */
+.svc-table { width: 100%; }
+.svc-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto 24px;
+  gap: 0 24px;
+  align-items: start;
+  padding: 28px 60px;
+  border-bottom: 1px solid var(--ink-12);
+  text-decoration: none;
+  transition: background .25s;
+  background: transparent;
+}
+.svc-row:hover { background: var(--paper); }
+.svc-idx { font-family: var(--serif); font-size: .75rem; font-weight: 300; color: var(--forest); opacity: .45; padding-top: 3px; }
+.svc-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.3; margin-bottom: 8px; }
+.svc-desc { font-size: .83rem; font-weight: 300; line-height: 1.85; color: var(--ink-60); }
+.svc-arrow { font-size: 1.1rem; color: var(--forest); opacity: .4; padding-top: 4px; transition: opacity .2s, transform .2s; }
+.svc-row:hover .svc-arrow { opacity: 1; transform: translate(3px,-3px); }
+
+@media (max-width: 900px) {
+  .svc-row {
+    grid-template-columns: 40px 1fr;
+    padding: 24px 32px;
+    gap: 0 16px;
+  }
+  .svc-arrow { display: none; }
+  .svc-name { font-size: 1.05rem; }
+}
+@media (max-width: 600px) {
+  .svc-row {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+    gap: 6px 0;
+  }
+  .svc-idx { font-size: .68rem; opacity: .35; }
+  .svc-name { font-size: 1rem; }
+  .svc-desc { font-size: .8rem; }
+}
+
+/* ── DAILY COMMITMENT BANNER — ADAPTIVE ─────────── */
+.daily-banner {
+  background: var(--forest);
+  padding: 36px 60px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.daily-banner-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,193,7,.15);
+  border: 1px solid rgba(255,193,7,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.daily-banner p {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 860px;
+}
+.daily-banner a {
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: .62rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+  padding-bottom: 2px;
+}
+@media (max-width: 768px) {
+  .daily-banner { padding: 28px 24px; flex-wrap: wrap; gap: 20px; }
+  .daily-banner p { font-size: .9rem; }
+  .daily-banner a { margin-left: 0; }
+}
+
+/* ── SECTORS HEADER GRID — ADAPTIVE ─────────────── */
+.sectors-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+@media (max-width: 768px) {
+  .sectors-header-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ── IMG FEATURE RESPONSIVE ─────────────────────── */
+@media (max-width: 700px) {
+  #img-feature { grid-template-columns: 1fr; }
+  .img-feature-cell { height: 240px; }
+}
+
+/* ── FOOTER Z-INDEX FIX ── */
+footer { position: relative; z-index: 1; }
+
+/* ══════════════════════════════════════════
+   PHOTO HERO
+══════════════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 92vh;
+  background: #0d0d0b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ── Left content pane ── */
+.hero-l {
+  position: relative;
+  z-index: 2;
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 60px 160px 72px;
+  gap: 0;
+}
+
+.hero-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: .58rem;
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.7);
+  margin-bottom: 22px;
+}
+
+.hero-headline {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.13;
+  color: #fff;
+  margin: 0 0 6px 0;
+  letter-spacing: -.01em;
+}
+.hero-headline .hero-gold {
+  color: #C9A84C;
+  font-style: italic;
+}
+.hero-headline em {
+  font-style: italic;
+  color: rgba(255,255,255,.75);
+}
+
+.hero-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,.52);
+  margin: 18px 0 36px 0;
+  max-width: 420px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: .82rem;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: #C9A84C;
+  border: 1px solid rgba(201,168,76,.55);
+  background: rgba(201,168,76,.07);
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.btn-hero-primary:hover {
+  background: rgba(201,168,76,.16);
+  border-color: #C9A84C;
+  color: #e0c070;
+}
+
+.btn-hero-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: .82rem;
+  font-weight: 300;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.45);
+  text-decoration: none;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+  transition: color .2s, border-color .2s;
+}
+.btn-hero-ghost:hover { color: rgba(255,255,255,.75); border-color: rgba(255,255,255,.4); }
+
+/* ── Right photo pane ── */
+.hero-r {
+  position: relative;
+  overflow: hidden;
+  order: 2;
+  min-height: 580px;
+}
+
+.hero-r-img {
+  position: absolute;
+  inset: 0;
+}
+.hero-r-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  filter: brightness(.88) saturate(.85);
+}
+
+.hero-r-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to right,  #0d0d0b 0%, rgba(13,13,11,.25) 30%, transparent 60%),
+    linear-gradient(to top,    #0d0d0b 0%, rgba(13,13,11,.55) 22%, transparent 55%);
+  pointer-events: none;
+}
+
+/* ── Stat cards strip ── */
+.hero-stats-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.hero-stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 26px 36px;
+  border-right: 1px solid rgba(255,255,255,.07);
+  background: rgba(13,13,11,.82);
+  backdrop-filter: blur(8px);
+}
+.hero-stat-card:last-child { border-right: none; }
+
+.hero-stat-icon {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.12);
+  border: 1px solid rgba(201,168,76,.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+}
+
+.hero-stat-num {
+  font-family: 'Cormorant', serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  letter-spacing: .02em;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+.hero-stat-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: .7rem;
+  font-weight: 300;
+  color: rgba(255,255,255,.38);
+  line-height: 1.5;
+}
+
+/* ── MOBILE: photo → text → stats ── */
+@media (max-width: 900px) {
+  #hero {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+  .hero-r {
+    position: relative;
+    order: 1;
+    min-height: unset;
+    height: 56vw;
+    max-height: 420px;
+  }
+  .hero-r-img::before {
+    background:
+      linear-gradient(to bottom, transparent 55%, #0d0d0b 100%),
+      linear-gradient(to right,  #0d0d0b 0%, transparent 40%);
+  }
+  .hero-l {
+    order: 2;
+    padding: 32px 32px 40px 32px;
+    background: #0d0d0b;
+  }
+  .hero-stats-bar {
+    position: relative;
+    order: 3;
+    grid-template-columns: 1fr;
+    border-top: 1px solid rgba(255,255,255,.07);
+  }
+  .hero-stat-card {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-r { height: 64vw; }
+  .hero-l { padding: 28px 20px 36px 20px; }
+  .hero-headline { font-size: 2.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-logo">INN<em>SÆI</em></div>
+</div>
+
+<!-- TOP RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-ticker">
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Offer Conversion</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+  </div>
+  <div class="ribbon-right">Continuous Process — <span>Outcome Driven</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">INN<em>SÆI</em></a>
+  <div class="nav-center">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="marketing.html">Marketing</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tel">-</span>
+    <a href="contact.html" class="btn-nav">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html" class="active">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="marketing.html">Marketing</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html" class="mobile-menu-cta">Contact Us</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- HERO -->
+<section id="hero">
+
+  <!-- photo — order 1 on mobile -->
+  <div class="hero-r">
+    <div class="hero-r-img">
+      <img
+        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=85&fit=crop&auto=format&crop=focalpoint&fp-x=0.45&fp-y=0.3"
+        alt="Professional IT recruitment consultant"
+        loading="eager"
+        onerror="this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=85&fit=crop&auto=format'"
+      />
+    </div>
+  </div>
+
+  <!-- text — order 2 on mobile -->
+  <div class="hero-l">
+    <div class="hero-eyebrow">GLOBAL TECHNOLOGY &amp; TALENT SOLUTIONS</div>
+    <h1 class="hero-headline">
+      Depth in understanding.<br>
+      precision in <span class="hero-gold">placement.</span>
+    </h1>
+    <p class="hero-sub">
+      At innsæi, we believe every individual deserves a role that truly matches their skills, passion, and purpose. We specialize in connecting new-age talent and skilled professionals with companies that value innovation and growth.
+    </p>
+    <div class="hero-actions">
+      <a href="careers.html" class="btn-hero-primary">Find Your Next Role</a>
+      <a href="about.html" class="btn-hero-ghost">How We Work →</a>
+    </div>
+  </div>
+
+  <!-- stats — order 3 on mobile -->
+  <div class="hero-stats-bar">
+    <div class="hero-stat-card">
+      <div class="hero-stat-icon">🛡️</div>
+      <div>
+        <div class="hero-stat-num"><span class="counter" data-to="50">0</span>+</div>
+        <div class="hero-stat-label">Placements Made</div>
+        <div class="hero-stat-sub">Successfully placed<br>IT professionals</div>
+      </div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-icon">⭐</div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Client Satisfaction</div>
+        <div class="hero-stat-sub">Delivering excellence and<br>dependable results</div>
+      </div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-icon">🎯</div>
+      <div>
+        <div class="hero-stat-num"><span class="counter" data-to="50">0</span>+</div>
+        <div class="hero-stat-label">Careers Elevated</div>
+        <div class="hero-stat-sub">Helping candidates achieve<br>their dream roles</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CLIENT LOGO CAROUSEL -->
+<section id="clients">
+  <div class="clients-label-row">
+    <div class="sec-label r">Trusted By</div>
+    <div class="clients-rule"></div>
+    <div class="clients-count">150+ companies worldwide</div>
+  </div>
+  <div class="clients-track-outer">
+    <div class="clients-track">
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">IBM</span><span class="logo-tag">Technology</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Oracle</span><span class="logo-tag">Enterprise Software</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Apple</span><span class="logo-tag">Technology</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Microsoft</span><span class="logo-tag">Cloud & Software</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Google</span><span class="logo-tag">Internet Services</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Amazon</span><span class="logo-tag">E-Commerce & Cloud</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Meta</span><span class="logo-tag">Social Technology</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Intel</span><span class="logo-tag">Semiconductors</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Cisco</span><span class="logo-tag">Networking</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Uber</span><span class="logo-tag">Mobility & Logistics</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Randstad</span><span class="logo-tag">Recruitment</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">Robert Half</span><span class="logo-tag">Talent Solutions</span></div></div>
+      <div class="logo-pill"><div class="logo-pill-inner"><span class="logo-name">PNC Finance</span><span class="logo-tag">Financial Services</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT TEASER -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="about-tag r">About</div>
+      <h2 class="about-h r d1">
+        Precision-driven<br>
+        IT recruitment<br>
+        <em>partner.</em>
+      </h2>
+      <p class="r" style="font-size:.82rem;font-style:italic;color:var(--forest);margin-bottom:20px;line-height:1.7;">
+        Delivering curated talent solutions with trust, transparency, and measurable excellence.
+      </p>
+      <div class="about-aside r d2">
+        <p>
+          "At Innsaei, every placement is intentional — built on strategy, aligned with vision, and executed with precision."
+        </p>
+      </div>
+      <div class="about-img-wrap r d3">
+        <img
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=95&fit=crop&auto=format&crop=focalpoint&fp-x=0.5&fp-y=0.4"
+          alt="innsæi team collaboration"
+          style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) brightness(.93);"
+          onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=95&fit=crop'"
+        />
+        <div class="about-img-caption">Austin, TX — Headquarters</div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <p class="about-body r">
+        At <strong>Innsaei</strong>, we redefine IT recruitment by delivering a highly curated, precision-driven approach to talent acquisition across the United States. Built on a foundation of trust, discretion, and measurable excellence, we have successfully supported 50+ candidates in securing roles aligned with their long-term vision, while partnering with growing organizations to fulfill critical technology mandates with speed and accuracy.
+      </p>
+      <p class="about-body r d1">
+        Our process is not transactional — it is consultative, ensuring every placement is strategically aligned, not just technically matched. We go beyond traditional recruitment by understanding both business objectives and candidate aspirations, creating outcomes that are sustainable and impactful.
+      </p>
+      <p class="about-body r d2">
+        With a commitment to 100% transparency and a focus on long-term value creation, Innsaei stands as a single, accountable partner for businesses seeking elite talent and for professionals ready to elevate their careers.
+      </p>
+      <div class="about-values r d3">
+        <div class="val">
+          <div class="val-n">I</div>
+          <div class="val-title">Precision Hiring</div>
+          <p class="val-body">Every candidate is carefully evaluated and aligned with role, culture, and long-term vision — not just skill match.</p>
+        </div>
+        <div class="val">
+          <div class="val-n">II</div>
+          <div class="val-title">Consultative Approach</div>
+          <p class="val-body">We act as advisors, not vendors — guiding both clients and candidates through every step of the hiring journey.</p>
+        </div>
+        <div class="val">
+          <div class="val-n">III</div>
+          <div class="val-title">Transparency</div>
+          <p class="val-body">Clear communication, real-time updates, and complete visibility into every action we take.</p>
+        </div>
+        <div class="val">
+          <div class="val-n">IV</div>
+          <div class="val-title">Long-Term Value</div>
+          <p class="val-body">We measure success by lasting impact — building careers and teams that grow together over time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE FEATURE STRIP -->
+<div id="img-feature">
+  <div class="img-feature-cell">
+    <img src="photo1.jpg" alt="IT Recruitment" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=85&fit=crop&auto=format'"/>
+    <div class="img-feature-overlay">
+      <div class="img-feature-label">Practice I</div>
+      <div class="img-feature-title">Empowering talent.<br><em>Delivering placements.</em></div>
+    </div>
+  </div>
+  <div class="img-feature-cell">
+    <img src="photo2.jpg" alt="Our Mission" onerror="this.src='https://images.unsplash.com/photo-1508615070457-7baeba4003ab?w=700&q=85&fit=crop&auto=format'"/>
+    <div class="img-feature-overlay">
+      <div class="img-feature-label">Practice II</div>
+      <div class="img-feature-title">Our mission is to streamline<br><em>the path from talent to placement.</em></div>
+    </div>
+  </div>
+  <div class="img-feature-cell">
+    <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=700&q=85&fit=crop&auto=format" alt="Digital Marketing" onerror="this.src='https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=700&q=85&fit=crop'"/>
+    <div class="img-feature-overlay">
+      <div class="img-feature-label">Practice III</div>
+      <div class="img-feature-title">Digital<br><em>Marketing</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- DAILY COMMITMENT BANNER -->
+<div class="daily-banner">
+  <div class="daily-banner-icon">✦</div>
+  <p>
+    <em style="color:#FFC107;">We stay connected with every candidate on a daily basis</em> throughout the entire marketing and placement process — actively working on their behalf until the right opportunity is secured.
+  </p>
+  <a href="contact.html">Learn more →</a>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="svc-header">
+    <div class="rl">
+      <div class="sec-label">What We Do</div>
+      <h2 class="sec-title">
+        Services that<br><em>go deeper.</em>
+      </h2>
+    </div>
+    <p class="svc-intro r d2">Six disciplines unified by one conviction: that the right people, the right security, and the right digital presence change everything for your business.</p>
+  </div>
+  <div class="svc-table">
+    <a href="recruitment.html" class="svc-row r">
+      <span class="svc-idx">01</span>
+      <div>
+        <div class="svc-name">Personalized Consultation</div>
+        <div class="svc-desc">At Innsæi, we begin with a one-on-one interaction to understand your career aspirations, technical interests, and job expectations. This session also gives you a clear overview of our process and how we help you secure the right opportunity in the U.S. IT market.</div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </a>
+    <a href="recruitment.html" class="svc-row r d1">
+      <span class="svc-idx">02</span>
+      <div>
+        <div class="svc-name">Technical Assessment & Profile Structuring</div>
+        <div class="svc-desc">You are then connected with our compliance team for a detailed evaluation of your skills, knowledge, and domain expertise. Based on this, we craft and optimize your professional profile and resume to align with current U.S. industry standards and hiring requirements.</div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </a>
+    <a href="security.html" class="svc-row r d2">
+      <span class="svc-idx">03</span>
+      <div>
+        <div class="svc-name">Strategic Profile Marketing</div>
+        <div class="svc-desc">Our marketing team actively promotes your profile across 20+ leading job portals and recruitment channels on a daily basis. We ensure maximum visibility by targeting relevant job roles and continuously updating your application strategy.</div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </a>
+    <a href="security.html" class="svc-row r d3">
+      <span class="svc-idx">04</span>
+      <div>
+        <div class="svc-name">Interview Preparation & Ongoing Support</div>
+        <div class="svc-desc">We provide dedicated guidance to help you confidently clear interviews, including technical preparation, mock sessions, and communication tips. Our team stays connected with you throughout the process, offering continuous support until placement.</div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </a>
+    <a href="digital.html" class="svc-row r d4">
+      <span class="svc-idx">05</span>
+      <div>
+        <div class="svc-name">Placement Assistance & Hiring Guidance</div>
+        <div class="svc-desc">From interview follow-ups to background verification and final onboarding, Innsæi supports you at every stage of the hiring journey. We ensure a smooth transition into your new role and help you take the next step in your career with confidence.</div>
+      </div>
+      <div class="svc-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-bg-img">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=60&fit=crop&auto=format" alt="" aria-hidden="true"/>
+  </div>
+  <div class="proc-inner">
+    <div class="proc-tag r">How We Work</div>
+    <h2 class="proc-h r d1">
+      Five steps to<br>
+      <em>your success.</em>
+    </h2>
+    <div class="proc-steps">
+      <div class="proc-step r d1">
+        <div class="proc-num-wrap"><span class="proc-roman">I</span></div>
+        <div class="proc-title">Discovery Call</div>
+        <p class="proc-body">We start by deeply understanding your goals — whether you are hiring, securing your premises, or launching a digital campaign. No assumptions, only listening.</p>
+      </div>
+      <div class="proc-step r d2">
+        <div class="proc-num-wrap"><span class="proc-roman">II</span></div>
+        <div class="proc-title">Strategic Planning</div>
+        <p class="proc-body">Our specialists map out the optimal approach: talent sourcing strategy, security infrastructure design, or digital channel selection — tailored entirely to you.</p>
+      </div>
+      <div class="proc-step r d3">
+        <div class="proc-num-wrap"><span class="proc-roman">III</span></div>
+        <div class="proc-title">Curated Execution</div>
+        <p class="proc-body">We take action — sourcing candidates, deploying monitoring systems, or launching campaigns — with precision and speed you won't find elsewhere.</p>
+      </div>
+      <div class="proc-step r d4">
+        <div class="proc-num-wrap"><span class="proc-roman">IV</span></div>
+        <div class="proc-title">Progress Tracking</div>
+        <p class="proc-body">Weekly progress reviews, transparent reporting, and open communication at every stage. You always know exactly where things stand.</p>
+      </div>
+      <div class="proc-step r d5">
+        <div class="proc-num-wrap"><span class="proc-roman">V</span></div>
+        <div class="proc-title">Ongoing Support</div>
+        <p class="proc-body">Our relationship doesn't end at onboarding or go-live. We remain your partner — refining, optimising, and scaling as your needs evolve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors" class="sectors-section">
+  <div class="sectors-inner">
+    <div class="sec-label r">What We Do</div>
+    <div class="sectors-header-grid">
+      <h2 class="sec-title r">Solutions built for<br><em>job seekers.</em></h2>
+      <p class="r d2" style="font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-60);padding-bottom:8px;">
+        We deliver end-to-end recruitment and talent solutions designed to help companies scale faster, hire smarter, and build high-performing teams.
+      </p>
+    </div>
+    <div class="sectors-grid r d1">
+      <div class="sector-cell"><div class="sector-glyph">⬡</div><div class="sector-name">IT Recruitment</div><div class="sector-count">Permanent • Contract • Remote</div></div>
+      <div class="sector-cell"><div class="sector-glyph">◈</div><div class="sector-name">Talent Sourcing & Screening</div><div class="sector-count">Shortlisting • Evaluation • Verification</div></div>
+      <div class="sector-cell"><div class="sector-glyph">⬟</div><div class="sector-name">Executive Hiring</div><div class="sector-count">Leadership • C-Level • Niche Roles</div></div>
+      <div class="sector-cell"><div class="sector-glyph">◇</div><div class="sector-name">Offshore Hiring Solutions</div><div class="sector-count">Global Talent • Dedicated Teams</div></div>
+      <div class="sector-cell"><div class="sector-glyph">○</div><div class="sector-name">Project-Based Hiring</div><div class="sector-count">Short-Term • Agile Teams</div></div>
+      <div class="sector-cell"><div class="sector-glyph">△</div><div class="sector-name">Campus & Fresher Hiring</div><div class="sector-count">Entry-Level • Graduate Programs</div></div>
+      <div class="sector-cell"><div class="sector-glyph">□</div><div class="sector-name">Recruitment Process Outsourcing</div><div class="sector-count">End-to-End Hiring • Scalable Support</div></div>
+      <div class="sector-cell"><div class="sector-glyph">⬠</div><div class="sector-name">Employer Branding & Insights</div><div class="sector-count">Brand Positioning • Market Intelligence</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+  <div class="testi-inner">
+    <div class="sec-label r">Client Stories</div>
+    <div class="testi-viewport">
+      <div class="testi-track" id="tt">
+        <div class="testi-slide">
+          <div class="testi-q">"innsæi didn't just fill our open roles — they <span class="hl">transformed</span> how we think about talent. Every candidate they sent was thoroughly prepared and culturally aligned. Best recruitment partner we've worked with."</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">VG</div>
+              <div>
+                <div class="testi-name">Vaidehi Gandhi</div>
+                <div class="testi-role">Data Analyst · DOWC Inc.</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" id="tp">←</button>
+              <button class="testi-btn" id="tn">→</button>
+              <div class="testi-dots">
+                <div class="testi-dot on" data-i="0"></div>
+                <div class="testi-dot" data-i="1"></div>
+                <div class="testi-dot" data-i="2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-q">"The security monitoring service gave us real <span class="hl">peace of mind</span>. Their team responded within minutes to an after-hours alert that turned out to be a genuine break-in attempt. They handled everything professionally."</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">MR</div>
+              <div>
+                <div class="testi-name">Marcus Reynolds</div>
+                <div class="testi-role">Operations Director · Tidal Logistics</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <div class="testi-dot" data-i="0"></div>
+                <div class="testi-dot on" data-i="1"></div>
+                <div class="testi-dot" data-i="2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-q">"Our organic traffic <span class="hl">tripled</span> within six months of innsæi taking over our digital marketing. The web redesign they delivered converted far above industry benchmarks. Exceptional work, every step."</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">SL</div>
+              <div>
+                <div class="testi-name">Sarah Lin</div>
+                <div class="testi-role">CEO · NorthStar E-Commerce</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <div class="testi-dot" data-i="0"></div>
+                <div class="testi-dot" data-i="1"></div>
+                <div class="testi-dot on" data-i="2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-bg-img">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=50&fit=crop&auto=format" alt="" aria-hidden="true"/>
+  </div>
+  <div class="cta-inner">
+    <div class="cta-left rl">
+      <div class="cta-tag">Begin</div>
+      <h2 class="cta-h">Your next<br><em>chapter</em><br>starts here.</h2>
+    </div>
+    <div class="cta-right rr">
+      <p class="cta-body">Whether you are searching for extraordinary talent, need reliable security for your business, or want a digital presence that truly performs — <strong>your next step starts with a single conversation.</strong></p>
+      <div class="cta-btns">
+        <a href="careers.html" class="btn-cta-a">I'm Looking for Work</a>
+        <a href="contact.html" class="btn-cta-b">Hire or Partner With Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <span class="ft-brand-logo">INN<em>SÆI</em></span>
+      <span class="ft-brand-sub">IT Recruitment · Non-IT Recruitment · Est. 2024</span>
+      <p class="ft-brand-copy">A global technology &amp; talent partner for candidates who believe their most important chapter is still ahead of them.</p>
+    </div>
+    <div>
+      <span class="ft-col-h">Navigate</span>
+      <ul class="ft-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="marketing.html">Marketing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="ft-col-h">Services</span>
+      <ul class="ft-list">
+        <li><a href="marketing.html">Profile Optimisation</a></li>
+        <li><a href="marketing.html">Multi-Platform Distribution</a></li>
+        <li><a href="marketing.html">Targeted Outreach</a></li>
+        <li><a href="marketing.html">Interview Preparation</a></li>
+        <li><a href="marketing.html">Offer Conversion</a></li>
+        <li><a href="marketing.html">Post-Placement Support</a></li>
+        <li><a href="marketing.html">End-to-End Process</a></li>
+      </ul>
+    </div>
+    <div class="ft-contact">
+      <span class="ft-col-h">Contact</span>
+      <strong>-</strong>
+      <a href="tel:">-</a>
+      <strong style="margin-top:16px;">Email</strong>
+      <a href="/cdn-cgi/l/email-protection#dbbfaea9bcbea8b3b9baa9b4afebec9bbcb6bab2b7f5b8b4b6"><span class="__cf_email__" data-cfemail="345041465351475c5655465b400403745359555d581a575b59">[email&#160;protected]</span></a>
+      <strong style="margin-top:16px;">Address</strong>
+      <a href="contact.html">-</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <p class="ft-copy-text">© <span id="year"></span> <em>INNSÆI</em> All rights reserved.</p>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <div class="ft-social">
+      <a href="https://www.linkedin.com/in/durgesh-brahmbhatt-02989025a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="ft-soc" title="LinkedIn">in</a>
+      <a href="#" class="ft-soc">𝕏</a>
+      <a href="#" class="ft-soc">fb</a>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

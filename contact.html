@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — innsæi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- ── EmailJS SDK ──────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ★ Replace with YOUR EmailJS Public Key (Account → API Keys)
+  (function(){ emailjs.init({ publicKey: "YOUR_PUBLIC_KEY" }); })();
+</script>
+<style>
+/* ── MAP ENHANCEMENTS ─────────────────────────────── */
+.map-guard {
+  position: absolute; inset: 0; z-index: 20;
+  cursor: pointer; background: transparent;
+}
+.map-guard-hint {
+  position: absolute; bottom: 72px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17,16,9,.72); backdrop-filter: blur(6px);
+  color: rgba(255,255,255,.7); font-size: .6rem;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 9px 18px; white-space: nowrap; pointer-events: none;
+  border: 1px solid rgba(255,255,255,.1); transition: opacity .3s;
+}
+.map-guard.dismissed { display: none; }
+.map-recenter {
+  position: absolute; top: 24px; right: 28px; z-index: 15;
+  background: var(--forest, #1a4d3a); color: #fff;
+  border: none; cursor: pointer; padding: 10px 18px;
+  display: flex; align-items: center; gap: 9px;
+  font-family: inherit; font-size: .6rem;
+  letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+  transition: background .2s, opacity .2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+}
+.map-recenter:hover { background: #246348; }
+.map-recenter svg { width: 13px; height: 13px; stroke: #FFC107; stroke-width: 2.2; fill: none; flex-shrink: 0; transition: transform .4s ease; }
+.map-recenter:hover svg { transform: rotate(360deg); }
+
+/* ── CONTACT GRID — ADAPTIVE ─────────────────────── */
+.contact-section { background: var(--cream); border-bottom: 1px solid var(--ink-12); margin-top: 50px;}
+.contact-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: start;
+}
+.contact-form-h {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 16px 0 0;
+}
+.contact-form-h em { font-style: italic; color: var(--forest); }
+
+/* INFO COLUMN */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--ink-12);
+  border-radius: 2px;
+  padding: 0 28px;
+  background: var(--paper, #faf9f6);
+}
+.contact-info-block {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--ink-12);
+}
+.contact-info-block:first-child { padding-top: 28px; }
+.contact-info-block:last-child { border-bottom: 0; }
+.contact-info-label {
+  font-size: .58rem; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--forest); font-weight: 500; margin-bottom: 12px;
+}
+.contact-info-text {
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 300;
+  color: var(--ink); line-height: 1.6;
+}
+.contact-info-text a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-20); padding-bottom: 1px; }
+.contact-info-text a:hover { color: var(--forest); border-color: var(--forest); }
+
+/* ── HOURS BAND — ADAPTIVE ───────────────────────── */
+.hours-band { background: var(--forest); padding: 80px 60px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.hours-band-inner { max-width: 1400px; margin: 0 auto; }
+.hours-label-row { display: flex; align-items: center; gap: 12px; margin-bottom: 56px; }
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.08);
+}
+.hours-cell { background: var(--forest); padding: 48px 40px; }
+.hours-cell-title { font-family: var(--serif); font-size: .9rem; font-weight: 400; color: var(--warm, #C8A96E); letter-spacing: .08em; margin-bottom: 20px; }
+.hours-cell-main { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+.hours-cell-sub { font-size: .78rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.9; }
+
+/* ── FORM ELEMENTS — ADAPTIVE ────────────────────── */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 56px; padding: 60px 40px; }
+  .contact-info { flex-direction: row; flex-wrap: wrap; gap: 0; padding: 0 24px; }
+  .contact-info-block { width: 50%; padding: 24px 24px 24px 0; border-bottom: 1px solid var(--ink-12); border-right: none; }
+  .hours-grid { grid-template-columns: 1fr; }
+  .hours-cell { padding: 36px 32px; }
+  .hours-band { padding: 56px 40px; }
+}
+@media (max-width: 768px) {
+  .contact-grid { padding: 48px 24px; }
+  .contact-info { flex-direction: column; }
+  .contact-info-block { width: 100%; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .hours-band { padding: 48px 24px; }
+  .hours-label-row { margin-bottom: 32px; }
+}
+@media (max-width: 480px) {
+  .contact-grid { padding: 40px 16px; }
+  .map-guard-hint { font-size: .55rem; padding: 8px 14px; }
+}
+
+/* ── FOOTER Z-INDEX FIX ──────────────────────────── */
+footer { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-logo">INN<em>SÆI</em></div>
+</div>
+
+<!-- TOP RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-ticker">
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Offer Conversion</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+  </div>
+  <div class="ribbon-right">Continuous Process — <span>Outcome Driven</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">INN<em>SÆI</em></a>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="marketing.html">Marketing</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tel">-</span>
+    <a href="contact.html" class="btn-nav active">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="marketing.html">Marketing</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html" class="mobile-menu-cta active">Contact Us</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- CONTACT MAIN -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- FORM COLUMN -->
+    <div class="contact-form-wrap" style="border:1px solid var(--ink-12);border-radius:2px;padding:40px 40px 48px;background:var(--paper,#faf9f6);">
+      <div class="r">
+        <div class="about-tag">Send a Message</div>
+        <h2 class="contact-form-h">
+          Tell us<br>
+          <em>what you need.</em>
+        </h2>
+      </div>
+      <p class="about-body r d1" style="margin-bottom:48px;">Whether you're looking to hire talent or get hired — our specialists are ready to help. Fill in the form and we'll respond within one business day.</p>
+
+      <!-- SUCCESS STATE -->
+      <div id="formSuccess" style="display:none; padding:48px 40px; background:var(--paper); border:1px solid var(--ink-12); text-align:center;">
+        <div style="font-family:var(--serif); font-size:2.8rem; font-weight:300; color:var(--forest); line-height:1; margin-bottom:16px;">Message<br><em>received.</em></div>
+        <p style="font-size:.88rem; font-weight:300; color:var(--ink-60); line-height:1.9;">Thank you for reaching out. A member of our team will be in touch with you within one business day.</p>
+      </div>
+
+      <!-- FORM -->
+      <form id="contactForm" action="/website/form/crm.lead" method="POST" novalidate>
+        <!-- EmailJS handles submission — no server-side hidden fields needed -->
+        <div id="formError" style="display:none; padding:14px 20px; background:rgba(160,0,0,.06); border:1px solid rgba(160,0,0,.2); color:#8a0000; font-size:.78rem; font-weight:300; line-height:1.8; margin-bottom:28px;"></div>
+
+        <!-- Honeypot -->
+        <div style="position:absolute; left:-9999px; top:0;" aria-hidden="true">
+          <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group r d1">
+            <label class="form-label" for="cf-fname">First Name <span style="color:var(--forest)">*</span></label>
+            <input class="form-input" type="text" id="cf-fname" name="fname" data-odoo="contact_name_first" placeholder="John" autocomplete="given-name" required>
+          </div>
+          <div class="form-group r d2">
+            <label class="form-label" for="cf-lname">Last Name <span style="color:var(--forest)">*</span></label>
+            <input class="form-input" type="text" id="cf-lname" name="lname" data-odoo="contact_name_last" placeholder="Doe" autocomplete="family-name" required>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group r d2">
+            <label class="form-label" for="cf-email">Email Address <span style="color:var(--forest)">*</span></label>
+            <input class="form-input" type="email" id="cf-email" name="email_from" placeholder="john@company.com" autocomplete="email" required>
+          </div>
+          <div class="form-group r d3">
+            <label class="form-label" for="cf-phone">Phone Number</label>
+            <input class="form-input" type="tel" id="cf-phone" name="partner_phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-group r d3">
+          <label class="form-label" for="cf-service">Service of Interest <span style="color:var(--forest)">*</span></label>
+          <select class="form-select" id="cf-service" name="name" required>
+            <option value="" disabled selected>Select a service area…</option>
+            <optgroup label="Recruitment & Placement">
+              <option value="IT Recruitment">IT Recruitment</option>
+              <option value="Non-IT Recruitment">Non-IT Recruitment</option>
+              <option value="Profile Optimisation">Profile Optimisation</option>
+              <option value="Multi-Platform Distribution">Multi-Platform Distribution</option>
+              <option value="Targeted Outreach">Targeted Outreach</option>
+            </optgroup>
+            <optgroup label="Interview & Conversion">
+              <option value="Interview Preparation">Interview Preparation</option>
+              <option value="Offer Conversion">Offer Conversion</option>
+            </optgroup>
+            <optgroup label="Support">
+              <option value="Post-Placement Support">Post-Placement Support</option>
+              <option value="End-to-End Process">End-to-End Process</option>
+            </optgroup>
+            <option value="General Inquiry">General Inquiry</option>
+          </select>
+        </div>
+
+        <div class="form-group r d4">
+          <label class="form-label" for="cf-company">Company / Organisation</label>
+          <input class="form-input" type="text" id="cf-company" name="company" placeholder="Acme Corporation" autocomplete="organization">
+        </div>
+
+        <div class="form-group r d4">
+          <label class="form-label" for="cf-msg">Tell Us More <span style="color:var(--forest)">*</span></label>
+          <textarea class="form-textarea" id="cf-msg" name="description" placeholder="Share any relevant details — your timeline, your queries or any specific requirements…" required></textarea>
+        </div>
+
+        <div class="r d5">
+          <button type="submit" class="btn-submit" id="submitBtn">Send Message &nbsp;→</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- INFO COLUMN -->
+    <div class="contact-info">
+      <div class="contact-info-block r">
+        <div class="contact-info-label">Our Office</div>
+        <div class="contact-info-text">-<br>-<br>-</div>
+      </div>
+      <div class="contact-info-block r d1">
+        <div class="contact-info-label">Telephone</div>
+        <div class="contact-info-text">
+          <a href="tel:">-</a>
+        </div>
+        <p style="font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-30); margin-top:10px; font-weight:400;">Mon – Fri &nbsp;·&nbsp; 9:00 AM – 11:00 PM EST<br>Sat &nbsp;·&nbsp; 10:00 AM – 2:00 PM EST</p>
+      </div>
+      <div class="contact-info-block r d2">
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-text">
+          <a href="/cdn-cgi/l/email-protection#fb9f8e899c9e8893999a89948fcbccbb9c969a9297d5989496"><span class="__cf_email__" data-cfemail="b8dccdcadfddcbd0dad9cad7cc888ff8dfd5d9d1d496dbd7d5">[email&#160;protected]</span></a>
+        </div>
+      </div>
+      <div class="contact-info-block r d3">
+        <div class="contact-info-label">Response Time</div>
+        <div class="contact-info-text" style="font-size:1.05rem; line-height:1.85;">
+          General inquiries<br>
+          <span style="font-size:.8rem; color:var(--ink-60);">within 24 hours</span>
+        </div>
+        <div class="contact-info-text" style="font-size:1.05rem; line-height:1.85; margin-top:12px;">
+          Urgent recruitment needs<br>
+          <span style="font-size:.8rem; color:var(--ink-60);">same-day response</span>
+        </div>
+        <div class="contact-info-text" style="font-size:1.05rem; line-height:1.85; margin-top:12px;">
+          Security monitoring<br>
+          <span style="font-size:.8rem; color:var(--ink-60);">24 / 7 / 365</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<div style="position:relative;background:var(--ink,#111);border-bottom:1px solid rgba(255,255,255,.06);">
+  <div style="position:relative;width:100%;height:440px;overflow:hidden;">
+    <iframe
+      id="mapFrame"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-97.76%2C30.36%2C-97.72%2C30.40&layer=mapnik&marker=30.3872%2C-97.7431"
+      style="width:100%;height:100%;border:0;filter:saturate(0.5) brightness(0.55) sepia(0.2);"
+      loading="lazy" allowfullscreen title="innsæi Office Location"
+    ></iframe>
+    <div class="map-guard" id="mapGuard" title="Click to interact with map">
+      <div class="map-guard-hint">Click to interact with map</div>
+    </div>
+    <button class="map-recenter" id="mapRecenter" title="Return to pinned location">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="2"  x2="12" y2="7"/>
+        <line x1="12" y1="17" x2="12" y2="22"/>
+        <line x1="2"  y1="12" x2="7"  y2="12"/>
+        <line x1="17" y1="12" x2="22" y2="12"/>
+      </svg>
+      Recenter
+    </button>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-120%);pointer-events:none;z-index:10;">
+      <div style="background:var(--forest);color:#fff;padding:14px 20px 14px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 40px rgba(0,0,0,.45);border-radius:2px;white-space:nowrap;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FFC107;flex-shrink:0;"></div>
+        <div>
+          <div style="font-family:var(--serif);font-size:1rem;font-weight:400;letter-spacing:.04em;">INNSÆI <em style="color:#FFC107;">Headquarters</em></div>
+          <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;">-</div>
+        </div>
+      </div>
+      <div style="width:2px;height:22px;background:var(--forest);margin:0 auto;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#FFC107;margin:0 auto;box-shadow:0 0 10px rgba(255,193,7,.5);"></div>
+    </div>
+    <div style="position:absolute;top:24px;left:28px;background:rgba(17,16,9,.7);padding:10px 16px;backdrop-filter:blur(8px);z-index:5;">
+      <span style="font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500;">Location</span>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(17,16,9,.85) 0%,transparent 100%);padding:28px 32px 20px;display:flex;align-items:flex-end;justify-content:space-between;z-index:5;">
+      <div>
+        <p style="font-family:var(--serif);font-size:1.1rem;font-weight:300;color:#fff;margin:0 0 4px;">-</p>
+        <p style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:0;">-</p>
+      </div>
+      <a href="https://maps.google.com" target="_blank" style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:2px;flex-shrink:0;">Open in Maps →</a>
+    </div>
+  </div>
+</div>
+
+<!-- HOURS BAND -->
+<div class="hours-band">
+  <div class="hours-band-inner">
+    <div class="hours-label-row">
+      <div style="width:20px; height:1px; background:rgba(255,255,255,.3);"></div>
+      <span style="font-size:.58rem; letter-spacing:.38em; text-transform:uppercase; color:rgba(255,255,255,.4); font-weight:500;">Availability</span>
+    </div>
+    <div class="hours-grid">
+      <div class="hours-cell r">
+        <div class="hours-cell-title">Business Hours</div>
+        <p class="hours-cell-main">Monday – Friday</p>
+        <p class="hours-cell-sub">9:00 AM – 11:00 PM EST<br>Saturday: 10:00 AM – 2:00 PM EST</p>
+      </div>
+      <div class="hours-cell r d1">
+        <div class="hours-cell-title">Security Monitoring</div>
+        <p class="hours-cell-main">24 / 7 / 365</p>
+        <p class="hours-cell-sub">Alarm & Video Response<br>Average response: &lt; 3 minutes</p>
+      </div>
+      <div class="hours-cell r d2">
+        <div class="hours-cell-title">Recruitment Emergencies</div>
+        <p class="hours-cell-main">On-Call Support</p>
+        <p class="hours-cell-sub">After-hours recruiter available<br>-</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left rl">
+      <div class="cta-tag">Begin</div>
+      <h2 class="cta-h">Partner with<br><em>innsæi</em><br>today.</h2>
+    </div>
+    <div class="cta-right rr">
+      <p class="cta-body">Join over <strong>150 client companies</strong> who trust innsæi to create their teams, secure their facilities, and grow their digital presence — all from a single trusted partner.</p>
+      <div class="cta-btns">
+        <a href="services.html" class="btn-cta-a">Explore Services</a>
+        <a href="careers.html" class="btn-cta-b">View Open Roles</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <span class="ft-brand-logo">INN<em>SÆI</em></span>
+      <span class="ft-brand-sub">IT Recruitment · Non-IT Recruitment · Est. 2024</span>
+      <p class="ft-brand-copy">A global technology &amp; talent partner for candidates who believe their most important chapter is still ahead of them.</p>
+    </div>
+    <div>
+      <span class="ft-col-h">Navigate</span>
+      <ul class="ft-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="marketing.html">Marketing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="ft-col-h">Services</span>
+      <ul class="ft-list">
+        <li><a href="marketing.html">Profile Optimisation</a></li>
+        <li><a href="marketing.html">Multi-Platform Distribution</a></li>
+        <li><a href="marketing.html">Targeted Outreach</a></li>
+        <li><a href="services.html">Interview Preparation</a></li>
+        <li><a href="services.html">Offer Conversion</a></li>
+        <li><a href="services.html">Post-Placement Support</a></li>
+        <li><a href="services.html">End-to-End Process</a></li>
+      </ul>
+    </div>
+    <div class="ft-contact">
+      <span class="ft-col-h">Contact</span>
+      <strong>-</strong>
+      <a href="tel:">-</a>
+      <strong style="margin-top:16px;">Email</strong>
+      <a href="/cdn-cgi/l/email-protection#d6b2a3a4b1b3a5beb4b7a4b9a2e6e196b1bbb7bfbaf8b5b9bb"><span class="__cf_email__" data-cfemail="40243532272533282221322f34707700272d21292c6e232f2d">[email&#160;protected]</span></a>
+      <strong style="margin-top:16px;">Address</strong>
+      <a href="contact.html">-</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <p class="ft-copy-text">© <span id="year"></span> <em>INNSÆI</em> All rights reserved.</p>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <div class="ft-social">
+      <a href="https://www.linkedin.com/in/durgesh-brahmbhatt-02989025a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="ft-soc" title="LinkedIn">in</a>
+      <a href="#" class="ft-soc">𝕏</a>
+      <a href="#" class="ft-soc">fb</a>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+/* ── MAP: SCROLL GUARD + RECENTER ─────────────────── */
+(function () {
+  var ORIGINAL_SRC = "https://www.openstreetmap.org/export/embed.html?bbox=-97.76%2C30.36%2C-97.72%2C30.40&layer=mapnik&marker=30.3872%2C-97.7431";
+  var frame    = document.getElementById('mapFrame');
+  var guard    = document.getElementById('mapGuard');
+  var recenter = document.getElementById('mapRecenter');
+  guard.addEventListener('click', function () { guard.classList.add('dismissed'); });
+  document.addEventListener('click', function (e) {
+    if (!frame.contains(e.target) && !guard.contains(e.target)) {
+      guard.classList.remove('dismissed');
+    }
+  });
+  recenter.addEventListener('click', function () {
+    frame.src = ORIGINAL_SRC;
+    guard.classList.remove('dismissed');
+  });
+})();
+
+/* ── CONTACT FORM — EmailJS ───────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const form        = document.getElementById('contactForm');
+  const submitBtn   = document.getElementById('submitBtn');
+  const formError   = document.getElementById('formError');
+  const formSuccess = document.getElementById('formSuccess');
+
+  // Clear red borders on re-type
+  form.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(field => {
+    field.addEventListener('input', () => { field.style.borderColor = ''; });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    formError.style.display = 'none';
+    formError.innerHTML = '';
+
+    /* ── Validation ─────────────────────────────── */
+    const required = ['cf-fname', 'cf-lname', 'cf-email', 'cf-service', 'cf-msg'];
+    let errors = [], firstInvalid = null;
+
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = 'rgba(160,0,0,.45)';
+        if (!firstInvalid) firstInvalid = el;
+        errors.push('Please fill in all required fields.');
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+
+    const emailEl = document.getElementById('cf-email');
+    if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+      emailEl.style.borderColor = 'rgba(160,0,0,.45)';
+      errors.push('Please enter a valid email address.');
+      if (!firstInvalid) firstInvalid = emailEl;
+    }
+
+    const phoneEl = document.getElementById('cf-phone');
+    if (phoneEl.value && phoneEl.value.replace(/\D/g, '').length < 7) {
+      phoneEl.style.borderColor = 'rgba(160,0,0,.45)';
+      errors.push('Please enter a valid phone number.');
+    }
+
+    const unique = [...new Set(errors)];
+    if (unique.length) {
+      formError.innerHTML = unique.map(m => `· ${m}`).join('<br>');
+      formError.style.display = 'block';
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    /* ── Send via EmailJS ───────────────────────── */
+    const original = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '.6';
+    submitBtn.innerHTML = 'Sending…';
+
+    const fname   = document.getElementById('cf-fname').value.trim();
+    const lname   = document.getElementById('cf-lname').value.trim();
+    const service = document.getElementById('cf-service').value;
+
+    // ★ These must match your EmailJS template variable names exactly
+    const templateParams = {
+      from_name    : fname + ' ' + lname,
+      from_email   : emailEl.value.trim(),
+      phone        : phoneEl.value.trim() || 'Not provided',
+      service      : service || 'General Inquiry',
+      company      : (document.getElementById('cf-company').value || '').trim() || 'Not provided',
+      message      : document.getElementById('cf-msg').value.trim(),
+      reply_to     : emailEl.value.trim()
+    };
+
+    try {
+      // ★ Replace SERVICE_ID and TEMPLATE_ID with your real values from EmailJS dashboard
+      await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.innerHTML = original;
+      formError.innerHTML = '· Something went wrong. Please try again or email us directly.';
+      formError.style.display = 'block';
+    }
+  });
+});
+</script>
+</body>
+</html>

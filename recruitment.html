@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Recruitment — innsæi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+
+/* ── INTRO ───────────────────────────────────────── */
+.stf-intro { background: var(--white); border-bottom: 1px solid var(--ink-12); }
+.stf-intro-inner { max-width: 1400px; margin: 0 auto; padding: 100px 60px; }
+.stf-intro-body { max-width: 820px; }
+.svc-feature-list { list-style: none; padding: 0; margin: 28px 0 0; }
+.svc-feature-list li { font-size: .88rem; font-weight: 300; color: var(--ink-60); padding: 11px 0; border-bottom: 1px solid var(--ink-08); display: flex; align-items: flex-start; gap: 14px; line-height: 1.6; }
+.svc-feature-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--forest); flex-shrink: 0; margin-top: 8px; }
+
+/* ── ENGAGEMENT MODELS ───────────────────────────── */
+.hire-types { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--ink-12); margin-top: 56px; }
+.hire-card { background: var(--white); padding: 52px 40px; position: relative; overflow: hidden; transition: background .35s; cursor: default; }
+.hire-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--forest); transform: scaleX(0); transform-origin: left; transition: transform .45s ease; }
+.hire-card:hover { background: var(--paper); }
+.hire-card:hover::after { transform: scaleX(1); }
+.hire-icon { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--forest); letter-spacing: .04em; line-height: 1; margin-bottom: 20px; display: block; }
+.hire-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 6px; }
+.hire-sub { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--forest); font-weight: 500; margin-bottom: 18px; }
+.hire-body { font-size: .84rem; font-weight: 300; line-height: 1.9; color: var(--ink-60); }
+
+/* ── WORK LOCATION TYPES ─────────────────────────── */
+.location-section { background: var(--forest); border-bottom: 1px solid rgba(255,255,255,.06); }
+.location-inner { max-width: 1400px; margin: 0 auto; padding: 100px 60px; }
+.location-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 72px; }
+.location-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.08); }
+.loc-card { background: var(--forest); padding: 56px 44px; position: relative; overflow: hidden; }
+.loc-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: #FFC107; transform: scaleY(0); transform-origin: bottom; transition: transform .45s ease; }
+.loc-card:hover::before { transform: scaleY(1); }
+.loc-icon { font-size: 1.5rem; display: block; margin-bottom: 20px; }
+.loc-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: #fff; margin-bottom: 8px; line-height: 1.1; }
+.loc-title em { font-style: italic; color: #FFC107; }
+.loc-tag { font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.35); font-weight: 500; margin-bottom: 20px; display: block; }
+.loc-body { font-size: .84rem; font-weight: 300; line-height: 1.9; color: rgba(255,255,255,.5); margin-bottom: 24px; }
+.loc-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.loc-pill { font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; padding: 7px 14px; border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.4); transition: all .25s; }
+.loc-card:hover .loc-pill { border-color: rgba(255,193,7,.4); color: #FFC107; }
+
+/* ── PARTNER LOGOS BAND ───────────────────────────── */
+.partners-band { background: var(--cream); border-bottom: 1px solid var(--ink-12); padding: 72px 60px; }
+.partners-inner { max-width: 1400px; margin: 0 auto; }
+.partners-label { font-size: .55rem; letter-spacing: .4em; text-transform: uppercase; color: var(--ink-60); font-weight: 500; display: flex; align-items: center; gap: 14px; margin-bottom: 52px; }
+.partners-label::before { content: ''; width: 28px; height: 1px; background: var(--ink-12); flex-shrink: 0; }
+.partners-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; background: var(--ink-12); }
+.partner-tile { background: var(--white); padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; transition: background .3s; cursor: default; position: relative; overflow: hidden; }
+.partner-tile::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--forest); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+.partner-tile:hover { background: var(--paper); }
+.partner-tile:hover::after { transform: scaleX(1); }
+.partner-tile-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--ink-60); letter-spacing: .04em; transition: color .3s; text-align: center; line-height: 1; }
+.partner-tile:hover .partner-tile-name { color: var(--forest); }
+.partner-tile-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--forest); opacity: 0; transition: opacity .3s; }
+.partner-tile:hover .partner-tile-dot { opacity: 1; }
+
+/* ── CAREER COACHING ─────────────────────────────── */
+.coach-section { background: var(--white); border-bottom: 1px solid var(--ink-12); }
+.coach-inner { max-width: 1400px; margin: 0 auto; padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.coach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink-12); }
+.coach-item { background: var(--cream); padding: 44px 36px; position: relative; overflow: hidden; transition: background .35s; }
+.coach-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--forest); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+.coach-item:hover { background: var(--paper); }
+.coach-item:hover::after { transform: scaleX(1); }
+.coach-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--ink-06); line-height: 1; margin-bottom: 16px; transition: color .3s; }
+.coach-item:hover .coach-num { color: rgba(26,77,58,.14); }
+.coach-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--ink); margin-bottom: 10px; transition: color .3s; }
+.coach-item:hover .coach-title { color: var(--forest); }
+.coach-body { font-size: .82rem; font-weight: 300; line-height: 1.85; color: var(--ink-60); }
+
+/* ══════════════════════════════════════════════════
+   PROCESS — FULLY SELF-CONTAINED
+   No var(), no external class deps, no animation hooks
+   ══════════════════════════════════════════════════ */
+.proc-section {
+  background: #f0ece4;
+  border-top: 1px solid rgba(26,20,14,0.1);
+  border-bottom: 1px solid rgba(26,20,14,0.1);
+}
+.proc-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 60px;
+}
+.proc-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.proc-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: .55rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: rgba(26,20,14,0.45);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+.proc-label::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: rgba(26,20,14,0.2);
+  flex-shrink: 0;
+  display: block;
+}
+.proc-heading {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  color: #1a140e;
+  line-height: 1.1;
+  margin: 0;
+  padding: 0;
+}
+.proc-heading em {
+  font-style: italic;
+  color: #1a4d3a;
+}
+.proc-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: .9rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(26,20,14,0.5);
+  margin: 0;
+  padding: 0;
+  align-self: end;
+}
+.proc-steps {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 1px;
+  background: rgba(26,20,14,0.12);
+  overflow: hidden;
+}
+.proc-step {
+  background: #ffffff;
+  padding: 44px 32px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: default;
+  transition: background .3s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.proc-step:hover {
+  background: #faf8f4;
+}
+.proc-step::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: #1a140e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s ease;
+  z-index: 2;
+}
+.proc-step:hover::after {
+  transform: scaleX(1);
+}
+.proc-num {
+  font-family: 'Cormorant', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--ink-08, rgba(26,20,14,0.85));
+  line-height: 1;
+  display: block;
+  width: 100%;
+  margin: 0 0 28px 0;
+  padding: 0;
+  background: none;
+  border: none;
+  transition: color .3s;
+}
+.proc-step:hover .proc-num {
+  color: var(--ink-08, rgba(26,20,14,0.85));
+}
+.proc-step-title {
+  font-family: 'Cormorant', serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: #1a140e;
+  line-height: 1.3;
+  display: block;
+  width: 100%;
+  margin: 0 0 14px 0;
+  padding: 0;
+}
+.proc-step-body {
+  font-family: 'Outfit', sans-serif;
+  font-size: .78rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(26,20,14,0.55);
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── TESTIMONIALS ────────────────────────────────── */
+.testimonials-section { background: var(--ink); border-bottom: 1px solid rgba(255,255,255,.06); }
+.testi-inner { max-width: 1400px; margin: 0 auto; padding: 100px 60px; }
+.testi-viewport { overflow: hidden; margin-top: 56px; }
+.testi-track { display: flex; transition: transform .55s cubic-bezier(.4,0,.2,1); }
+.testi-slide { min-width: 100%; }
+.testi-q { font-family: var(--serif); font-size: clamp(1.1rem,2vw,1.4rem); font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.85; margin-bottom: 48px; font-style: italic; border-left: 2px solid rgba(255,193,7,.4); padding-left: 32px; }
+.hl { color: #FFC107; font-style: normal; }
+.testi-foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.testi-person { display: flex; align-items: center; gap: 20px; }
+.testi-av { width: 52px; height: 52px; border-radius: 50%; background: var(--forest); display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 500; letter-spacing: .08em; color: #fff; flex-shrink: 0; }
+.testi-name { font-size: .92rem; font-weight: 500; color: #fff; }
+.testi-role { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 4px; }
+.testi-ctrl { display: flex; align-items: center; gap: 16px; }
+.testi-btn { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.15); background: transparent; color: rgba(255,255,255,.6); cursor: pointer; font-size: 1rem; transition: all .25s; display: flex; align-items: center; justify-content: center; }
+.testi-btn:hover { background: var(--forest); border-color: var(--forest); color: #fff; }
+.testi-dots { display: flex; gap: 8px; }
+.testi-dot { width: 24px; height: 2px; background: rgba(255,255,255,.18); cursor: pointer; transition: all .3s; border: 0; padding: 0; }
+.testi-dot.on { background: #FFC107; width: 36px; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media(max-width:1100px){
+  .stf-intro-inner, .partners-inner, .location-inner, .coach-inner, .testi-inner { padding: 64px 24px; }
+  .proc-inner { padding: 64px 24px; }
+  .hire-types { grid-template-columns: 1fr; }
+  .location-header { grid-template-columns: 1fr; gap: 20px; }
+  .location-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: repeat(3,1fr); }
+  .coach-inner { grid-template-columns: 1fr; gap: 40px; }
+  .proc-header { grid-template-columns: 1fr; gap: 20px; }
+  .proc-steps { grid-template-columns: repeat(3,1fr); }
+}
+@media(max-width:640px){
+  .hire-types, .coach-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: repeat(2,1fr); }
+  .proc-steps { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:420px){
+  .proc-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pre-logo">INN<em>SÆI</em></div>
+</div>
+
+<!-- TOP RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-ticker">
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Offer Conversion</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+    <span class="ribbon-item">Profile Optimisation</span>
+    <span class="ribbon-item">Multi-Platform Distribution</span>
+    <span class="ribbon-item">Targeted Outreach</span>
+    <span class="ribbon-item">Interview Preparation</span>
+    <span class="ribbon-item">Post-Placement Support</span>
+  </div>
+  <div class="ribbon-right">Continuous Process — <span>Outcome Driven</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">INN<em>SÆI</em></a>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="recruitment.html" class="active">Recruitment</a>
+    <a href="marketing.html">Marketing</a>
+    <a href="careers.html">Careers</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-tel">-</span>
+    <a href="contact.html" class="btn-nav">Contact Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="recruitment.html" class="active">Recruitment</a>
+  <a href="marketing.html">Marketing</a>
+  <a href="careers.html">Careers</a>
+  <a href="contact.html" class="mobile-menu-cta">Contact Us</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- INNER HERO -->
+<div class="inner-hero" style="position:relative;overflow:hidden;">
+  <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=1400&q=60&fit=crop&auto=format"
+    alt="IT Recruitment professionals"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.42) brightness(.26);z-index:0;"
+    loading="eager" aria-hidden="true"/>
+  <div class="inner-hero-overlay" style="position:relative;z-index:1;">
+    <div class="inner-hero-tag">Talent Division</div>
+    <h1 class="inner-hero-h">IT <em>Recruitment.</em></h1>
+  </div>
+</div>
+
+<!-- ══ INTRO ══════════════════════════════════════ -->
+<section class="stf-intro">
+  <div class="stf-intro-inner">
+    <div class="stf-intro-body">
+      <div class="sec-label r">What We Deliver</div>
+      <h2 class="sec-title r d1">Find your dream job.<br><em>Top talent</em> found.</h2>
+      <p class="r d2" style="font-size:.95rem;font-weight:300;line-height:1.95;color:var(--ink-60);margin-top:28px;max-width:680px;"><strong style="color:var(--ink);">innsæi</strong> is one of the leading IT recruitment agencies in the U.S.. We connect innovative IT professionals with the most trusted companies — and we help candidates get the interviews, offer letters, and career trajectories they deserve.</p>
+      <p class="r d3" style="font-size:.95rem;font-weight:300;line-height:1.95;color:var(--ink-60);margin-top:16px;max-width:680px;">Our mentors have placed professionals at Google, Amazon, McKinsey, Infosys, TCS, Oracle, Virtusa, and Brooksource. We work on your behalf from the first conversation through to onboarding — and beyond.</p>
+      <ul class="svc-feature-list r d4">
+        <li>Access to exclusive career opportunities at reputable U.S. companies</li>
+        <li>Interview preparation and mock sessions tailored to specific roles</li>
+        <li>Salary negotiation support backed by real market data</li>
+        <li>Weekly progress tracking to move you closer to your offer every day</li>
+        <li>Full management support through onboarding completion</li>
+        <li>Specialisation in remote, hybrid, and on-site positions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ENGAGEMENT MODELS ══════════════════════════ -->
+<section style="background:var(--cream);border-bottom:1px solid var(--ink-12);">
+  <div style="max-width:1400px;margin:0 auto;padding:100px 60px;">
+    <div class="sec-label r">Engagement Models</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;">
+      <h2 class="sec-title r d1">Three paths to<br><em>the right hire.</em></h2>
+      <p class="r d2" style="font-size:.9rem;font-weight:300;line-height:1.85;color:var(--ink-60);">We specialise across all engagement and salary structures — from flexible W2 contracts to permanent direct placements. You choose the model; we make it work.</p>
+    </div>
+    <div class="hire-types r d2">
+      <div class="hire-card">
+        <span class="hire-icon">W2</span>
+        <div class="hire-title">Contract (W2)</div>
+        <div class="hire-sub">Flexible Engagement</div>
+        <p class="hire-body">Project-based contracts where professionals work as W2 employees through innsæi. Perfect for businesses needing specialist skills for defined engagements without long-term commitment.</p>
+      </div>
+      <div class="hire-card">
+        <span class="hire-icon">C2H</span>
+        <div class="hire-title">Contract to Hire</div>
+        <div class="hire-sub">Try Before You Hire</div>
+        <p class="hire-body">Start with a contract period that transitions to full-time employment. Both parties get the clarity of a working relationship before making a permanent commitment — the lowest-risk path to a great hire.</p>
+      </div>
+        <div class="hire-card">
+        <span class="hire-icon">1099</span>
+        <div class="hire-title">1099 Contract</div>
+        <div class="hire-sub">Independent Contractor Engagement</div>
+        <p class="hire-body">
+          We place skilled IT professionals on 1099 contracts for project-based or hourly engagements. Candidates operate as independent contractors, managing their own taxes and benefits, while companies gain flexibility, faster hiring cycles, and access to specialized talent without long-term payroll commitments.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORK LOCATION TYPES ════════════════════════ -->
+<section class="location-section">
+  <div class="location-inner">
+    <div class="location-header">
+      <div class="rl">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+          <span style="width:28px;height:1px;background:rgba(255,255,255,.25);display:inline-block;flex-shrink:0;"></span>
+          <span style="font-size:.55rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:500;">Work Location</span>
+        </div>
+        <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;color:#fff;line-height:1.1;">Work where<br><em style="color:#FFC107;">you work best.</em></h2>
+      </div>
+      <p class="rr" style="font-size:.9rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.45);padding-bottom:8px;">Every placement we make is matched not just by skill — but by how and where a candidate does their best work. We place across all three location models, giving you full flexibility on where your career takes root.</p>
+    </div>
+    <div class="location-grid r d1">
+      <div class="loc-card">
+        <span class="loc-icon">🌐</span>
+        <div class="loc-title">Remote</div>
+        <span class="loc-tag">Work From Anywhere</span>
+        <p class="loc-body">Fully distributed roles with no geographic constraint. We place candidates in remote-first organisations across the U.S. — no commute, no compromise on quality of work or compensation.</p>
+        <div class="loc-pills">
+          <span class="loc-pill">Fully Distributed</span>
+          <span class="loc-pill">Async-Friendly</span>
+          <span class="loc-pill">U.S.-Based Roles</span>
+        </div>
+      </div>
+      <div class="loc-card">
+        <span class="loc-icon">⚖️</span>
+        <div class="loc-title">Hybrid</div>
+        <span class="loc-tag">The Best of Both</span>
+        <p class="loc-body">Structured flexibility — typically two to three days in-office with the remainder remote. The preferred model for candidates who value collaboration without sacrificing autonomy.</p>
+        <div class="loc-pills">
+          <span class="loc-pill">2–3 Days In-Office</span>
+          <span class="loc-pill">Flexible Schedule</span>
+          <span class="loc-pill">Collaborative</span>
+        </div>
+      </div>
+      <div class="loc-card">
+        <span class="loc-icon">🏢</span>
+        <div class="loc-title">On-site</div>
+        <span class="loc-tag">Full Presence</span>
+        <p class="loc-body">Roles that require daily in-person presence. We place candidates at offices across major U.S. metros — ensuring proximity, team integration, and the full in-person experience.</p>
+        <div class="loc-pills">
+          <span class="loc-pill">Major U.S. Metros</span>
+          <span class="loc-pill">Daily Presence</span>
+          <span class="loc-pill">Team-Integrated</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLACEMENT PARTNERS ════════════════════════ -->
+<div class="partners-band">
+  <div class="partners-inner">
+    <div class="partners-label r">Placement Partners</div>
+    <div class="partners-grid r d1">
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="font-size:1.5rem;letter-spacing:-.01em;">Amazon</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="letter-spacing:.06em;">Infosys</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="letter-spacing:.02em;">Oracle</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="letter-spacing:.14em;font-size:1.1rem;">TCS</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="letter-spacing:.04em;">Virtusa</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+      <div class="partner-tile">
+        <span class="partner-tile-name" style="font-size:1.05rem;letter-spacing:.02em;">Brooksource</span>
+        <div class="partner-tile-dot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MARQUEE ════════════════════════════════════ -->
+<div class="marquee-band">
+  <div class="marquee-inner">
+    <span class="mi">IT Recruitment <em>·</em></span>
+    <span class="mi">Contract W2 <em>·</em></span>
+    <span class="mi">Contract to Hire <em>·</em></span>
+    <span class="mi">Direct Hire <em>·</em></span>
+    <span class="mi">Remote <em>·</em></span>
+    <span class="mi">Hybrid <em>·</em></span>
+    <span class="mi">On-site <em>·</em></span>
+    <span class="mi">Interview Coaching <em>·</em></span>
+    <span class="mi">Resume Optimisation <em>·</em></span>
+    <span class="mi">Salary Negotiation <em>·</em></span>
+    <span class="mi">IT Recruitment <em>·</em></span>
+    <span class="mi">Contract W2 <em>·</em></span>
+    <span class="mi">Contract to Hire <em>·</em></span>
+    <span class="mi">Direct Hire <em>·</em></span>
+    <span class="mi">Remote <em>·</em></span>
+    <span class="mi">Hybrid <em>·</em></span>
+    <span class="mi">On-site <em>·</em></span>
+    <span class="mi">Interview Coaching <em>·</em></span>
+    <span class="mi">Salary Negotiation <em>·</em></span>
+  </div>
+</div>
+
+<!-- ══ CAREER COACHING ════════════════════════════ -->
+<section class="coach-section">
+  <div class="coach-inner">
+    <div class="rl">
+      <div class="sec-label r">Career Services</div>
+      <h2 class="sec-title r d1">We coach you<br><em>to win the role.</em></h2>
+      <p class="r d2" style="font-size:.9rem;font-weight:300;line-height:1.9;color:var(--ink-60);margin-top:28px;">90% of our candidates say innsæi saves time, values their money, and always puts in the extra effort. Our career coaching programme is why.</p>
+      <a href="contact.html" class="btn-primary r d3" style="margin-top:40px;display:inline-block;">Book Free Consultation</a>
+    </div>
+    <div class="coach-grid rr d1">
+      <div class="coach-item">
+        <div class="coach-num">01</div>
+        <div class="coach-title">Resume Review &amp; Writing</div>
+        <p class="coach-body">We audit and rewrite your CV to highlight the experience that matters most for the roles you're targeting — not just a list of jobs.</p>
+      </div>
+      <div class="coach-item">
+        <div class="coach-num">02</div>
+        <div class="coach-title">Interview Preparation</div>
+        <p class="coach-body">Role-specific mock interviews, STAR-method coaching, and live feedback. We prepare you for the questions that are actually asked at top companies.</p>
+      </div>
+      <div class="coach-item">
+        <div class="coach-num">03</div>
+        <div class="coach-title">Salary Negotiation</div>
+        <p class="coach-body">Armed with live market data, we coach you to negotiate with confidence — making sure you leave no compensation on the table.</p>
+      </div>
+      <div class="coach-item">
+        <div class="coach-num">04</div>
+        <div class="coach-title">Onboarding Support</div>
+        <p class="coach-body">We don't disappear at offer acceptance. Our support continues through your first 90 days to ensure a successful transition into the role.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ════════════════════════════════════ -->
+<section class="proc-section">
+  <div class="proc-inner">
+    <div class="proc-header">
+      <div>
+        <div class="proc-label">Our Recruitment Process</div>
+        <h2 class="proc-heading">From search to<br><em>start date.</em></h2>
+      </div>
+      <p class="proc-desc">A five-stage process built around quality, transparency, and a result you can rely on — for both candidates and client companies.</p>
+    </div>
+    <div class="proc-steps">
+
+      <div class="proc-step">
+        <span class="proc-num">I</span>
+        <span class="proc-step-title">Intake &amp; Discovery</span>
+        <p class="proc-step-body">We learn your technical requirements, team culture, and the non-negotiables that make someone the right fit — not just the right CV.</p>
+      </div>
+
+      <div class="proc-step">
+        <span class="proc-num">II</span>
+        <span class="proc-step-title">Active Sourcing</span>
+        <p class="proc-step-body">Beyond job boards — we reach into our own talent network, alumni community, and referral channels to surface candidates others never see.</p>
+      </div>
+
+      <div class="proc-step">
+        <span class="proc-num">III</span>
+        <span class="proc-step-title">Deep Screening</span>
+        <p class="proc-step-body">Technical assessments, cultural alignment interviews, and thorough reference verification. Only those who pass every stage reach your desk.</p>
+      </div>
+
+      <div class="proc-step">
+        <span class="proc-num">IV</span>
+        <span class="proc-step-title">Curated Presentation</span>
+        <p class="proc-step-body">We present 2–3 thoroughly vetted candidates with detailed profiles, not a shortlist of 20. Every introduction comes with our full conviction.</p>
+      </div>
+
+      <div class="proc-step">
+        <span class="proc-num">V</span>
+        <span class="proc-step-title">Offer &amp; Onboard</span>
+        <p class="proc-step-body">We facilitate negotiations, manage the offer process, and support both sides through day one and beyond. The relationship lasts long after the placement.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════ -->
+<section class="testimonials-section">
+  <div class="testi-inner">
+    <div class="sec-label r">Candidate Stories</div>
+    <div class="testi-viewport r d1">
+      <div class="testi-track" id="tt">
+
+        <div class="testi-slide">
+          <div class="testi-q">"I was skeptical at first — I'd worked with recruiters before who would send my resume and then go completely silent. innsæi was different from day one. They called me every day with updates, prepped me for every interview round, and felt like they were genuinely in my corner. I landed a Data Analyst role at DOWC within six weeks. I can't recommend them enough — they actually <span class="hl">changed my life.</span>"</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">VG</div>
+              <div>
+                <div class="testi-name">Vaidehi Gandhi</div>
+                <div class="testi-role">Data Analyst · DOWC Inc.</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <button class="testi-dot on" data-i="0"></button>
+                <button class="testi-dot" data-i="1"></button>
+                <button class="testi-dot" data-i="2"></button>
+                <button class="testi-dot" data-i="3"></button>
+                <button class="testi-dot" data-i="4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-slide">
+          <div class="testi-q">"I had been job hunting for four months on my own and was getting nowhere. A friend referred me to innsæi and honestly it was a turning point. Within two weeks they had me interviewing at Excellus. Their interview prep was thorough — they helped me structure my STAR answers, coached me on how to handle technical rounds, and gave me confidence I didn't know I had. I got the offer and I'm now <span class="hl">thriving as a DevOps Engineer.</span>"</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">EG</div>
+              <div>
+                <div class="testi-name">Eden Gebrekidan</div>
+                <div class="testi-role">DevOps Engineer · Excellus BCBS</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <button class="testi-dot" data-i="0"></button>
+                <button class="testi-dot on" data-i="1"></button>
+                <button class="testi-dot" data-i="2"></button>
+                <button class="testi-dot" data-i="3"></button>
+                <button class="testi-dot" data-i="4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-slide">
+          <div class="testi-q">"What stood out to me about innsæi wasn't just that they found me a job — it was that they genuinely cared. My consultant would text me after interviews to ask how it went, followed up with the client on my behalf, and negotiated a salary that was 18% higher than what I had originally been offered. That attention to detail and <span class="hl">real human care</span> is what makes them exceptional."</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">GS</div>
+              <div>
+                <div class="testi-name">Gagan Shrivastava</div>
+                <div class="testi-role">Full-Stack Developer · Amazon</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <button class="testi-dot" data-i="0"></button>
+                <button class="testi-dot" data-i="1"></button>
+                <button class="testi-dot on" data-i="2"></button>
+                <button class="testi-dot" data-i="3"></button>
+                <button class="testi-dot" data-i="4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-slide">
+          <div class="testi-q">"I relocated to the U.S. and had no idea how the job market worked here. innsæi didn't just help me find a job — they educated me on the entire process, from how W2 contracts work to how to negotiate comp packages. My consultant was patient, thorough, and always available. Three months after arriving in the U.S. I was <span class="hl">working at a Fortune 500 company.</span>"</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">RN</div>
+              <div>
+                <div class="testi-name">Ravi Nair</div>
+                <div class="testi-role">Cloud Engineer · Microsoft Partner</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <button class="testi-dot" data-i="0"></button>
+                <button class="testi-dot" data-i="1"></button>
+                <button class="testi-dot" data-i="2"></button>
+                <button class="testi-dot on" data-i="3"></button>
+                <button class="testi-dot" data-i="4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-slide">
+          <div class="testi-q">"After being laid off, I was worried my gap in employment would hurt my chances. My innsæi consultant helped me reframe my experience positively, update my resume to highlight recent certifications, and get in front of companies who valued what I brought. I <span class="hl">received two offers in the same week</span> and had the luxury of choosing the one that fit my life better. That's something I couldn't have done alone."</div>
+          <div class="testi-foot">
+            <div class="testi-person">
+              <div class="testi-av">PM</div>
+              <div>
+                <div class="testi-name">Priya Mehta</div>
+                <div class="testi-role">Business Analyst · Randstad Client</div>
+              </div>
+            </div>
+            <div class="testi-ctrl">
+              <button class="testi-btn" onclick="ts(-1)">←</button>
+              <button class="testi-btn" onclick="ts(1)">→</button>
+              <div class="testi-dots">
+                <button class="testi-dot" data-i="0"></button>
+                <button class="testi-dot" data-i="1"></button>
+                <button class="testi-dot" data-i="2"></button>
+                <button class="testi-dot" data-i="3"></button>
+                <button class="testi-dot on" data-i="4"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left rl">
+      <div class="cta-tag">Ready?</div>
+      <h2 class="cta-h">Your next<br><em>role</em> is<br>waiting.</h2>
+    </div>
+    <div class="cta-right rr">
+      <p class="cta-body">Whether you are a candidate chasing your dream role or a company building your dream team — <strong>start with a free consultation.</strong> We are ready when you are.</p>
+      <div class="cta-btns">
+        <a href="careers.html" class="btn-cta-a">Browse Open Roles</a>
+        <a href="contact.html" class="btn-cta-b">Hire Talent</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <span class="ft-brand-logo">INN<em>SÆI</em></span>
+      <span class="ft-brand-sub">IT Recruitment · Non-IT Recruitment · Est. 2024</span>
+      <p class="ft-brand-copy">A global technology &amp; talent partner for candidates who believe their most important chapter is still ahead of them.</p>
+    </div>
+    <div>
+      <span class="ft-col-h">Navigate</span>
+      <ul class="ft-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="recruitment.html">Recruitment</a></li>
+        <li><a href="marketing.html">Marketing</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="ft-col-h">Services</span>
+      <ul class="ft-list">
+        <li><a href="recruitment.html">Profile Optimisation</a></li>
+        <li><a href="recruitment.html">Multi-Platform Distribution</a></li>
+        <li><a href="recruitment.html">Targeted Outreach</a></li>
+        <li><a href="recruitment.html">Interview Preparation</a></li>
+        <li><a href="recruitment.html">Offer Conversion</a></li>
+        <li><a href="recruitment.html">Post-Placement Support</a></li>
+        <li><a href="recruitment.html">End-to-End Process</a></li>
+      </ul>
+    </div>
+    <div class="ft-contact">
+      <span class="ft-col-h">Contact</span>
+      <strong>-</strong>
+      <a href="tel:">-</a>
+      <strong style="margin-top:16px;">Email</strong>
+      <a href="mailto:durgeshbarot07@gmail.com">durgeshbarot07@gmail.com</a>
+      <strong style="margin-top:16px;">Address</strong>
+      <a href="contact.html">-</a>
+    </div>
+  </div>
+  <div class="ft-base">
+    <p class="ft-copy-text">&copy; <span id="year"></span> <em>INNSÆI</em> All rights reserved.</p>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <div class="ft-social">
+      <a href="https://www.linkedin.com/in/durgesh-brahmbhatt-02989025a?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" class="ft-soc" title="LinkedIn">in</a>
+      <a href="#" class="ft-soc">𝕏</a>
+      <a href="#" class="ft-soc">fb</a>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+(function(){
+  var idx = 0, total = 5;
+  var track = document.getElementById('tt');
+  var dots  = document.querySelectorAll('.testi-dot');
+
+  function render(){
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dots.forEach(function(d){ d.classList.remove('on'); });
+    document.querySelectorAll('.testi-dot[data-i="'+idx+'"]').forEach(function(d){ d.classList.add('on'); });
+  }
+
+  window.ts = function(dir){
+    idx = (idx + dir + total) % total;
+    render();
+  };
+
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      idx = parseInt(this.getAttribute('data-i'));
+      render();
+    });
+  });
+})();
+</script>
+</body>
+</html>
