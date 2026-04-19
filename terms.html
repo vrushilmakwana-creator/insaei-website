@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions — Innsæi Global Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+:root {
+  --serif: 'Cormorant', serif;
+  --sans:  'Outfit', sans-serif;
+  --ink:       #111110;
+  --ink-60:    rgba(17,17,16,.6);
+  --ink-12:    rgba(17,17,16,.12);
+  --forest:    #1c3a2a;
+  --gold:      #c9a84c;
+  --paper:     #f5f3ef;
+  --paper-alt: #edeae4;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); }
+
+/* NAV */
+.pg-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 68px;
+  background: var(--paper); border-bottom: 1px solid var(--ink-12);
+}
+.pg-nav-logo {
+  font-family: var(--serif); font-size: 1.22rem; font-weight: 400;
+  letter-spacing: .04em; color: var(--ink); text-decoration: none;
+}
+.pg-nav-logo em { font-style: italic; color: var(--forest); }
+.pg-nav-links { display: flex; gap: 36px; list-style: none; }
+.pg-nav-links a {
+  font-size: .6rem; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none; transition: color .2s;
+}
+.pg-nav-links a:hover { color: var(--ink); }
+
+/* HERO */
+.pg-hero {
+  background: var(--ink); padding: 80px 60px 64px;
+  position: relative; overflow: hidden;
+}
+.pg-hero::before {
+  content: ''; position: absolute; left: -100px; bottom: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: rgba(28,58,42,.25); pointer-events: none;
+}
+.pg-hero-label {
+  font-family: var(--sans); font-size: .56rem; font-weight: 400;
+  letter-spacing: .28em; text-transform: uppercase; color: rgba(201,168,76,.65); margin-bottom: 20px;
+}
+.pg-hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.12;
+  color: #fff; margin-bottom: 20px;
+}
+.pg-hero-title em { font-style: italic; color: rgba(255,255,255,.5); }
+.pg-hero-sub {
+  font-size: .88rem; font-weight: 300; line-height: 1.8;
+  color: rgba(255,255,255,.45); max-width: 560px;
+}
+.pg-hero-meta {
+  margin-top: 32px;
+  font-size: .62rem; font-weight: 300; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.22);
+}
+
+/* LAYOUT */
+.policy-layout {
+  display: grid; grid-template-columns: 220px 1fr;
+  max-width: 1100px; margin: 0 auto; padding: 72px 40px 100px; gap: 80px;
+  align-items: start;
+}
+
+/* Sidebar TOC */
+.policy-toc { position: sticky; top: 96px; }
+.policy-toc-label {
+  font-size: .55rem; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block;
+}
+.policy-toc ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.policy-toc a {
+  display: block; font-size: .78rem; font-weight: 300; line-height: 1.5;
+  color: var(--ink-60); text-decoration: none;
+  padding: 7px 12px; border-left: 2px solid transparent; transition: color .2s, border-color .2s;
+}
+.policy-toc a:hover, .policy-toc a.active { color: var(--forest); border-left-color: var(--forest); }
+
+/* Content */
+.policy-content { min-width: 0; }
+.policy-section { margin-bottom: 56px; }
+.policy-section:last-child { margin-bottom: 0; }
+.policy-section-num {
+  font-family: var(--serif); font-size: .7rem; font-weight: 300;
+  color: var(--gold); letter-spacing: .12em; display: block; margin-bottom: 8px;
+}
+.policy-section h2 {
+  font-family: var(--serif); font-size: 1.7rem; font-weight: 400; line-height: 1.2;
+  color: var(--ink); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--ink-12);
+}
+.policy-section h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  color: var(--forest); margin: 28px 0 10px;
+}
+.policy-section p {
+  font-size: .87rem; font-weight: 300; line-height: 1.95; color: var(--ink-60); margin-bottom: 16px;
+}
+.policy-section p:last-child { margin-bottom: 0; }
+.policy-section ul { margin: 8px 0 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.policy-section li { list-style: disc; font-size: .87rem; font-weight: 300; line-height: 1.75; color: var(--ink-60); }
+.policy-callout {
+  background: rgba(201,168,76,.07); border-left: 3px solid var(--gold);
+  padding: 20px 24px; margin: 24px 0;
+}
+.policy-callout p { font-size: .84rem; font-weight: 300; line-height: 1.85; color: var(--ink); margin: 0; }
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(255,255,255,.55); padding: 56px 60px 24px; }
+.ft-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.ft-brand-logo { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: #fff; letter-spacing: .06em; display: block; margin-bottom: 6px; }
+.ft-brand-logo em { font-style: italic; }
+.ft-brand-sub { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-bottom: 16px; }
+.ft-brand-copy { font-size: .8rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,.4); max-width: 280px; }
+.ft-col-h { font-size: .55rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-bottom: 20px; }
+.ft-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-list a { font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.ft-list a:hover { color: #fff; }
+.ft-contact { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; font-weight: 300; }
+.ft-contact strong { color: rgba(255,255,255,.3); font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 12px; }
+.ft-contact a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; }
+.ft-base { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; }
+.ft-copy-text { font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.28); }
+.ft-copy-text em { font-style: normal; color: rgba(255,255,255,.45); }
+.ft-social { display: flex; gap: 12px; }
+.ft-soc { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; font-size: .65rem; color: rgba(255,255,255,.4); text-decoration: none; transition: border-color .2s, color .2s; }
+.ft-soc:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+
+@media (max-width: 900px) {
+  .policy-layout { grid-template-columns: 1fr; gap: 40px; }
+  .policy-toc { position: static; }
+  .ft-main { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 768px) {
+  .pg-nav { padding: 0 24px; }
+  .pg-nav-links { display: none; }
+  .pg-hero { padding: 56px 24px 48px; }
+  .policy-layout { padding: 48px 24px 72px; }
+}
+@media (max-width: 480px) { .ft-main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<script src="components.js"></script>
+
+<!-- HERO -->
+<section class="pg-hero">
+  <div class="pg-hero-label">Legal &amp; Usage</div>
+  <h1 class="pg-hero-title">Terms &amp;<br><em>Conditions</em></h1>
+  <p class="pg-hero-sub">These terms govern how you may use Innsæi Global Tech's website and services. Please read them carefully — they exist to protect both you and us.</p>
+  <p class="pg-hero-meta">Last reviewed: January 2025</p>
+</section>
+
+<!-- BODY -->
+<div class="policy-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="policy-toc">
+    <span class="policy-toc-label">On this page</span>
+    <ul>
+      <li><a href="#collection">Information We Collect</a></li>
+      <li><a href="#use">Use of Information</a></li>
+      <li><a href="#sharing">Data Sharing</a></li>
+      <li><a href="#security">Data Security</a></li>
+      <li><a href="#third-party">Third-Party Links</a></li>
+      <li><a href="#children">Children's Privacy</a></li>
+      <li><a href="#rights">Your Rights</a></li>
+      <li><a href="#changes">Policy Changes</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <article class="policy-content">
+
+    <section class="policy-section" id="collection">
+      <span class="policy-section-num">01</span>
+      <h2>Information We Collect</h2>
+
+      <h3>Personal Information</h3>
+      <p>We may collect personal details — including your name, email address, phone number, and other identifying information — when you voluntarily provide them to us. This information is gathered to fulfil your requests, deliver customer support, and continuously improve the quality of our services.</p>
+
+      <h3>Usage Information</h3>
+      <p>When you browse our website or engage with our services, we may automatically record certain technical data. This includes your IP address, browser type, operating system, referring URLs, and general browsing behaviour. We use this data to understand usage trends, maintain the performance of our website, and gather aggregate demographic insights.</p>
+    </section>
+
+    <section class="policy-section" id="use">
+      <span class="policy-section-num">02</span>
+      <h2>Use of Collected Information</h2>
+
+      <h3>Service Delivery</h3>
+      <p>Your personal information may be used to provide the services you have requested, address your enquiries, and communicate with you about relevant updates, developments, or opportunities associated with Innsæi Global Tech.</p>
+
+      <h3>Internal Purposes</h3>
+      <p>We may use the information we collect for internal functions such as data analysis, ongoing research, and the improvement of our platform and offerings. In some cases, this involves aggregating or anonymising data for statistical or analytical purposes.</p>
+
+      <h3>Marketing Communications</h3>
+      <p>Where you have given your consent, we may send you promotional communications about our services, tailored offers, or other material we believe may be relevant to your career or professional goals. You may withdraw your consent and opt out of receiving such communications at any point, without any restriction or penalty.</p>
+    </section>
+
+    <section class="policy-section" id="sharing">
+      <span class="policy-section-num">03</span>
+      <h2>Data Sharing &amp; Disclosure</h2>
+
+      <h3>Third-Party Service Providers</h3>
+      <p>We may share your personal information with trusted third-party providers who support us in delivering our services and operating our platform. All such providers are bound by confidentiality agreements and are explicitly prohibited from using your data for any purpose beyond what is necessary to fulfil the services we have engaged them for.</p>
+
+      <h3>Legal Compliance</h3>
+      <p>We may disclose personal information when required to do so by law, governmental directive, or where such disclosure is necessary to protect the rights, property, or safety of Innsæi Global Tech, our clients, our candidates, or the general public.</p>
+    </section>
+
+    <section class="policy-section" id="security">
+      <span class="policy-section-num">04</span>
+      <h2>Data Security</h2>
+      <p>We apply appropriate technical and organisational safeguards to protect your personal information from unauthorised access, disclosure, modification, or destruction. Our security practices are reviewed and updated regularly to reflect current best standards.</p>
+
+      <div class="policy-callout">
+        <p>Important: No method of internet transmission or electronic storage is entirely infallible. While we take every reasonable precaution to protect your data, we cannot offer an absolute guarantee of security. By engaging with our platform, you acknowledge this inherent limitation of online data handling.</p>
+      </div>
+    </section>
+
+    <section class="policy-section" id="third-party">
+      <span class="policy-section-num">05</span>
+      <h2>Links to Third-Party Websites</h2>
+      <p>Our website may feature links to external websites or services operated by third parties. These Terms &amp; Conditions, and our Privacy Policy, do not extend to those external sites. We strongly recommend that you review the privacy policies of any third-party websites you visit before submitting personal information through those platforms.</p>
+    </section>
+
+    <section class="policy-section" id="children">
+      <span class="policy-section-num">06</span>
+      <h2>Children's Privacy</h2>
+      <p>Our website and the services we provide are intended solely for individuals aged 13 and above. We do not knowingly collect or store personal information from children under the age of 13. If we become aware that we have inadvertently collected such information without verified parental or guardian consent, we will take prompt steps to delete it from our records.</p>
+    </section>
+
+    <section class="policy-section" id="rights">
+      <span class="policy-section-num">07</span>
+      <h2>Your Rights</h2>
+      <p>You have the right to access, correct, update, or request the deletion of your personal information held by Innsæi Global Tech at any time. To exercise any of these rights, please contact us using the details provided at the bottom of this page. We will respond promptly and work to address your request in accordance with applicable law.</p>
+    </section>
+
+    <section class="policy-section" id="changes">
+      <span class="policy-section-num">08</span>
+      <h2>Changes to These Terms</h2>
+      <p>We may revise these Terms &amp; Conditions periodically to reflect changes in our services, legal requirements, or internal practices. Any amendments will be posted on this page with an updated effective date clearly indicated.</p>
+      <p>We encourage you to revisit this page from time to time to remain informed about how we collect, use, and protect the personal information you entrust to us.</p>
+    </section>
+
+    <section class="policy-section" id="contact">
+      <span class="policy-section-num">09</span>
+      <h2>Contact Us</h2>
+      <p>If you have any questions, concerns, or requests relating to these Terms &amp; Conditions or our approach to data privacy, please do not hesitate to reach out. We are committed to addressing your enquiries openly and responsively.</p>
+      <p>You can contact us at <a href="mailto:info@innsaeiglobaltech.com" style="color:var(--forest);">info@innsaeiglobaltech.com</a> or through our <a href="contact.html" style="color:var(--forest);">contact page</a>.</p>
+    </section>
+
+  </article>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const sections = document.querySelectorAll('.policy-section');
+const links = document.querySelectorAll('.policy-toc a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  links.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Innsæi Global Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+:root {
+  --serif: 'Cormorant', serif;
+  --sans:  'Outfit', sans-serif;
+  --ink:       #111110;
+  --ink-60:    rgba(17,17,16,.6);
+  --ink-12:    rgba(17,17,16,.12);
+  --forest:    #1c3a2a;
+  --gold:      #c9a84c;
+  --paper:     #f5f3ef;
+  --paper-alt: #edeae4;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); }
+
+/* NAV */
+.pg-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 68px;
+  background: var(--paper); border-bottom: 1px solid var(--ink-12);
+}
+.pg-nav-logo {
+  font-family: var(--serif); font-size: 1.22rem; font-weight: 400;
+  letter-spacing: .04em; color: var(--ink); text-decoration: none;
+}
+.pg-nav-logo em { font-style: italic; color: var(--forest); }
+.pg-nav-links { display: flex; gap: 36px; list-style: none; }
+.pg-nav-links a {
+  font-size: .6rem; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none; transition: color .2s;
+}
+.pg-nav-links a:hover { color: var(--ink); }
+
+/* HERO */
+.pg-hero {
+  background: var(--forest); padding: 80px 60px 64px;
+  position: relative; overflow: hidden;
+}
+.pg-hero::after {
+  content: ''; position: absolute; right: -80px; top: -80px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: rgba(201,168,76,.06); pointer-events: none;
+}
+.pg-hero-label {
+  font-family: var(--sans); font-size: .56rem; font-weight: 400;
+  letter-spacing: .28em; text-transform: uppercase; color: rgba(201,168,76,.65); margin-bottom: 20px;
+}
+.pg-hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 400; line-height: 1.12;
+  color: #fff; margin-bottom: 20px;
+}
+.pg-hero-title em { font-style: italic; color: rgba(255,255,255,.6); }
+.pg-hero-sub {
+  font-size: .88rem; font-weight: 300; line-height: 1.8;
+  color: rgba(255,255,255,.55); max-width: 540px;
+}
+.pg-hero-meta {
+  margin-top: 32px;
+  font-size: .62rem; font-weight: 300; letter-spacing: .16em;
+  text-transform: uppercase; color: rgba(255,255,255,.28);
+}
+
+/* LAYOUT */
+.policy-layout {
+  display: grid; grid-template-columns: 220px 1fr;
+  max-width: 1100px; margin: 0 auto; padding: 72px 40px 100px; gap: 80px;
+  align-items: start;
+}
+
+/* Sidebar TOC */
+.policy-toc {
+  position: sticky; top: 96px;
+}
+.policy-toc-label {
+  font-size: .55rem; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+  display: block;
+}
+.policy-toc ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.policy-toc a {
+  display: block; font-size: .78rem; font-weight: 300; line-height: 1.5;
+  color: var(--ink-60); text-decoration: none;
+  padding: 7px 12px; border-left: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.policy-toc a:hover,
+.policy-toc a.active { color: var(--forest); border-left-color: var(--forest); }
+
+/* Content */
+.policy-content { min-width: 0; }
+
+.policy-section { margin-bottom: 56px; }
+.policy-section:last-child { margin-bottom: 0; }
+
+.policy-section-num {
+  font-family: var(--serif); font-size: .7rem; font-weight: 300;
+  color: var(--gold); letter-spacing: .12em; display: block; margin-bottom: 8px;
+}
+.policy-section h2 {
+  font-family: var(--serif); font-size: 1.7rem; font-weight: 400; line-height: 1.2;
+  color: var(--ink); margin-bottom: 20px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--ink-12);
+}
+.policy-section h3 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400;
+  color: var(--forest); margin: 28px 0 10px;
+}
+.policy-section p {
+  font-size: .87rem; font-weight: 300; line-height: 1.95; color: var(--ink-60);
+  margin-bottom: 16px;
+}
+.policy-section p:last-child { margin-bottom: 0; }
+.policy-section ul {
+  margin: 8px 0 16px 20px; display: flex; flex-direction: column; gap: 8px;
+}
+.policy-section li {
+  list-style: disc; font-size: .87rem; font-weight: 300;
+  line-height: 1.75; color: var(--ink-60);
+}
+
+/* Callout box */
+.policy-callout {
+  background: rgba(28,58,42,.06); border-left: 3px solid var(--forest);
+  padding: 20px 24px; margin: 24px 0;
+}
+.policy-callout p {
+  font-size: .84rem; font-weight: 300; line-height: 1.85;
+  color: var(--ink); margin: 0;
+}
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(255,255,255,.55); padding: 56px 60px 24px; }
+.ft-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.ft-brand-logo { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: #fff; letter-spacing: .06em; display: block; margin-bottom: 6px; }
+.ft-brand-logo em { font-style: italic; }
+.ft-brand-sub { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-bottom: 16px; }
+.ft-brand-copy { font-size: .8rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,.4); max-width: 280px; }
+.ft-col-h { font-size: .55rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.3); display: block; margin-bottom: 20px; }
+.ft-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-list a { font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.ft-list a:hover { color: #fff; }
+.ft-contact { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; font-weight: 300; }
+.ft-contact strong { color: rgba(255,255,255,.3); font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 12px; }
+.ft-contact a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; }
+.ft-base { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; }
+.ft-copy-text { font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.28); }
+.ft-copy-text em { font-style: normal; color: rgba(255,255,255,.45); }
+.ft-social { display: flex; gap: 12px; }
+.ft-soc { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; font-size: .65rem; color: rgba(255,255,255,.4); text-decoration: none; transition: border-color .2s, color .2s; }
+.ft-soc:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+
+@media (max-width: 900px) {
+  .policy-layout { grid-template-columns: 1fr; gap: 40px; }
+  .policy-toc { position: static; }
+  .ft-main { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 768px) {
+  .pg-nav { padding: 0 24px; }
+  .pg-nav-links { display: none; }
+  .pg-hero { padding: 56px 24px 48px; }
+  .policy-layout { padding: 48px 24px 72px; }
+}
+@media (max-width: 480px) { .ft-main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<script src="components.js"></script>
+
+<!-- HERO -->
+<section class="pg-hero">
+  <div class="pg-hero-label">Transparency &amp; Trust</div>
+  <h1 class="pg-hero-title">Privacy<br><em>Policy</em></h1>
+  <p class="pg-hero-sub">Innsæi Global Tech takes your privacy seriously. This policy explains exactly how we collect, use, and protect your personal information — with no ambiguity.</p>
+  <p class="pg-hero-meta">Last reviewed: January 2025</p>
+</section>
+
+<!-- BODY -->
+<div class="policy-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="policy-toc">
+    <span class="policy-toc-label">On this page</span>
+    <ul>
+      <li><a href="#your-info">Your Personal Information</a></li>
+      <li><a href="#collection">What We Collect</a></li>
+      <li><a href="#other-sources">Third-Party Sources</a></li>
+      <li><a href="#uses">How We Use Your Data</a></li>
+      <li><a href="#disclosure">Sharing &amp; Disclosure</a></li>
+      <li><a href="#storage">Data Storage &amp; Security</a></li>
+      <li><a href="#updates">Policy Updates</a></li>
+      <li><a href="#contact">Your Feedback</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <article class="policy-content">
+
+    <section class="policy-section" id="your-info">
+      <span class="policy-section-num">01</span>
+      <h2>Your Personal Information</h2>
+      <p>Innsæi Global Tech recognises that your privacy holds genuine value, and we take our obligations in handling your personal information seriously. We operate in full compliance with applicable international and regional privacy legislation, and our internal guidelines are built to align with these frameworks at every level.</p>
+    </section>
+
+    <section class="policy-section" id="collection">
+      <span class="policy-section-num">02</span>
+      <h2>Information We Collect from You</h2>
+      <p>We collect and process some or all of the following types of information depending on your interaction with us:</p>
+      <ul>
+        <li>Details you submit when applying for a role — whether through an online platform, via email, in person, or by any other means.</li>
+        <li>Personal particulars including your name, email address, postal address, telephone number, date of birth, qualifications, employment history, and professional skills.</li>
+        <li>Records of any correspondence you initiate with us.</li>
+        <li>A log of your progress through any recruitment or hiring process we facilitate on your behalf.</li>
+        <li>Technical data from your visits to our website — including traffic patterns, geographic location data, server logs, the referring site that directed you to us, and the specific resources you accessed.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="other-sources">
+      <span class="policy-section-num">03</span>
+      <h2>Information We Collect from Other Sources</h2>
+      <p>In addition to what you share directly, we may gather information from external sources in the following ways:</p>
+      <ul>
+        <li>We may cross-reference the information you provide with publicly available material — such as your LinkedIn profile or other professional online presences.</li>
+        <li>We search both public and private databases that may contain your professional profile or CV in order to identify suitable candidates for open roles.</li>
+        <li>We may receive your details from a third party who has referred you to us as a candidate seeking employment.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="uses">
+      <span class="policy-section-num">04</span>
+      <h2>How We Use Your Information</h2>
+
+      <h3>Lawful basis for processing</h3>
+      <p>We rely on legitimate interest as the lawful basis for collecting and processing your data. That interest centres on effectively matching candidates with the right opportunities — a purpose that is both clear and proportionate.</p>
+
+      <h3>Purposes of processing</h3>
+      <p>Your information is used in the following ways:</p>
+      <ul>
+        <li>To evaluate your suitability for roles we have identified as a potential match for you.</li>
+        <li>To consider your profile against other openings that align with your experience and goals.</li>
+        <li>To communicate with you regarding your recruitment journey and next steps.</li>
+        <li>To supplement your profile with relevant data obtained from trusted third-party providers.</li>
+        <li>To connect you with opportunities that best reflect your ambitions and professional background.</li>
+      </ul>
+
+      <h3>Automated processing and profiling</h3>
+      <p>We may use Innsæi's internal technology to assist candidates in identifying and pursuing suitable roles. Our recruitment process involves applying candidate profiles across relevant platforms, scheduling interviews with prospective employers, and preparing candidates thoroughly so they are positioned for success as swiftly as possible.</p>
+    </section>
+
+    <section class="policy-section" id="disclosure">
+      <span class="policy-section-num">05</span>
+      <h2>Sharing &amp; Disclosure of Your Information</h2>
+      <p>We may share your personal data with third parties in the following circumstances:</p>
+      <ul>
+        <li>In the event of a company restructure or change in ownership, all data will be transferred to the incoming entity, which will assume responsibility for continuing to provide services to you.</li>
+        <li>If any part of our business is sold or assigned, the relevant data will transfer to the acquiring party subject to the same confidentiality obligations.</li>
+        <li>Where we are party to legal proceedings and disclosure is necessary to defend our position.</li>
+        <li>When required by regulatory authorities or in response to a lawful legal request.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="storage">
+      <span class="policy-section-num">06</span>
+      <h2>Data Storage &amp; Security</h2>
+      <p>We take appropriate technical and organisational steps to safeguard all personal data we hold. Our security measures are designed to prevent accidental loss, unlawful access, and unauthorised use or disclosure of your information.</p>
+      <p>Access to your data is restricted to individuals with a genuine business need. Anyone processing your information does so under strict authorisation and is bound by confidentiality obligations. We also maintain procedures to identify and respond to any suspected data security breach, and will notify you and the relevant regulatory authority where we are legally required to do so.</p>
+
+      <div class="policy-callout">
+        <p>Please note: while we take every reasonable precaution, the transmission of data over the internet cannot be guaranteed to be entirely secure. Any data you transmit to us electronically is done so at your own risk, and we encourage you to take appropriate precautions on your end as well.</p>
+      </div>
+    </section>
+
+    <section class="policy-section" id="updates">
+      <span class="policy-section-num">07</span>
+      <h2>Policy Updates</h2>
+      <p>We reserve the right to revise or update this policy at any time. Any changes will take effect immediately upon being posted to this site, and a clear notice will be placed on the relevant page to alert you to the update.</p>
+      <p>When we make material changes, we will update this statement, the homepage, and any other locations we consider appropriate — so that you are always informed about what information we hold, how we use it, and when and why we might share it.</p>
+    </section>
+
+    <section class="policy-section" id="contact">
+      <span class="policy-section-num">08</span>
+      <h2>Your Feedback &amp; Questions</h2>
+      <p>We value every person who engages with Innsæi Global Tech, and we genuinely welcome your views, feedback, and questions about this policy, our website, or our services. If something doesn't seem right, or you'd simply like to know more, please reach out to us directly at <a href="mailto:info@innsaeiglobaltech.com" style="color:var(--forest);">info@innsaeiglobaltech.com</a> or via our <a href="contact.html" style="color:var(--forest);">contact page</a>.</p>
+    </section>
+
+  </article>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Highlight active TOC link on scroll
+const sections = document.querySelectorAll('.policy-section');
+const links = document.querySelectorAll('.policy-toc a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  links.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+<script src="site.js"></script>
+</body>
+</html>

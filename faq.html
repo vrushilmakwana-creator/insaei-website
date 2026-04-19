@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQs — Innsæi Global Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── PAGE-LEVEL TOKENS (mirrors styles.css variables) ── */
+:root {
+  --serif: 'Cormorant', serif;
+  --sans:  'Outfit', sans-serif;
+  --ink:       #111110;
+  --ink-60:    rgba(17,17,16,.6);
+  --ink-12:    rgba(17,17,16,.12);
+  --forest:    #1c3a2a;
+  --gold:      #c9a84c;
+  --paper:     #f5f3ef;
+  --paper-alt: #edeae4;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); }
+
+/* ── NAV ── */
+.pg-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  height: 68px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink-12);
+}
+.pg-nav-logo {
+  font-family: var(--serif);
+  font-size: 1.22rem; font-weight: 400; letter-spacing: .04em;
+  color: var(--ink); text-decoration: none;
+}
+.pg-nav-logo em { font-style: italic; color: var(--forest); }
+.pg-nav-links { display: flex; gap: 36px; list-style: none; }
+.pg-nav-links a {
+  font-size: .6rem; font-weight: 400; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none;
+  transition: color .2s;
+}
+.pg-nav-links a:hover { color: var(--ink); }
+
+/* ── HERO STRIP ── */
+.pg-hero {
+  background: var(--forest);
+  padding: 80px 60px 64px;
+  position: relative; overflow: hidden;
+}
+.pg-hero::after {
+  content: '';
+  position: absolute; right: -80px; top: -80px;
+  width: 420px; height: 420px; border-radius: 50%;
+  background: rgba(201,168,76,.06);
+  pointer-events: none;
+}
+.pg-hero-label {
+  font-family: var(--sans);
+  font-size: .56rem; font-weight: 400; letter-spacing: .28em;
+  text-transform: uppercase; color: rgba(201,168,76,.65);
+  margin-bottom: 20px;
+}
+.pg-hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 400; line-height: 1.12; color: #fff;
+  margin-bottom: 20px;
+}
+.pg-hero-title em { font-style: italic; color: rgba(255,255,255,.6); }
+.pg-hero-sub {
+  font-size: .88rem; font-weight: 300; line-height: 1.8;
+  color: rgba(255,255,255,.55); max-width: 520px;
+}
+
+/* ── FAQ LAYOUT ── */
+.faq-outer {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 80px 40px 100px;
+}
+
+/* Ask a Question bar */
+.faq-ask-bar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 28px;
+  background: #fff;
+  border: 1px solid var(--ink-12);
+  margin-bottom: 64px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.faq-ask-bar:hover { border-color: var(--forest); }
+.faq-ask-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: .9rem; color: #fff;
+}
+.faq-ask-text {
+  font-family: var(--serif); font-size: 1rem; font-weight: 300;
+  color: var(--ink-60); flex: 1;
+}
+.faq-ask-arrow {
+  font-size: .7rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold);
+}
+
+/* Section labels */
+.faq-section-label {
+  font-family: var(--sans);
+  font-size: .55rem; font-weight: 400; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ink-12);
+}
+
+/* Accordion items */
+.faq-item {
+  border-bottom: 1px solid var(--ink-12);
+}
+.faq-q {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0;
+  cursor: pointer;
+  user-select: none;
+}
+.faq-q-text {
+  font-family: var(--serif);
+  font-size: 1.15rem; font-weight: 400; line-height: 1.35;
+  color: var(--ink);
+  transition: color .2s;
+}
+.faq-item.open .faq-q-text { color: var(--forest); }
+.faq-q-icon {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border: 1px solid var(--ink-12); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; color: var(--ink-60);
+  transition: background .2s, border-color .2s, transform .3s;
+  margin-top: 2px;
+}
+.faq-item.open .faq-q-icon {
+  background: var(--forest); border-color: var(--forest);
+  color: #fff; transform: rotate(45deg);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s ease, padding .3s ease;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 28px; }
+.faq-a-text {
+  font-size: .88rem; font-weight: 300; line-height: 1.9;
+  color: var(--ink-60);
+}
+.faq-a-text ul {
+  margin: 12px 0 0 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.faq-a-text li { list-style: disc; }
+
+/* Contact nudge */
+.faq-contact-nudge {
+  margin-top: 72px;
+  padding: 40px 48px;
+  background: var(--forest);
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+.faq-nudge-copy {
+  font-family: var(--serif);
+  font-size: 1.2rem; font-weight: 300; line-height: 1.6; color: #fff;
+}
+.faq-nudge-copy em { font-style: italic; color: rgba(201,168,76,.85); }
+.faq-nudge-btn {
+  flex-shrink: 0;
+  display: inline-block;
+  font-size: .58rem; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink);
+  background: var(--gold); text-decoration: none;
+  padding: 14px 28px;
+  transition: opacity .2s;
+}
+.faq-nudge-btn:hover { opacity: .85; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink); color: rgba(255,255,255,.55);
+  padding: 56px 60px 24px;
+}
+.ft-main {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.ft-brand-logo {
+  font-family: var(--serif); font-size: 2rem; font-weight: 400;
+  color: #fff; letter-spacing: .06em; display: block; margin-bottom: 6px;
+}
+.ft-brand-logo em { font-style: italic; }
+.ft-brand-sub {
+  font-size: .58rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.3); display: block; margin-bottom: 16px;
+}
+.ft-brand-copy {
+  font-size: .8rem; font-weight: 300; line-height: 1.75;
+  color: rgba(255,255,255,.4); max-width: 280px;
+}
+.ft-col-h {
+  font-size: .55rem; font-weight: 400; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255,255,255,.3);
+  display: block; margin-bottom: 20px;
+}
+.ft-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-list a {
+  font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.5);
+  text-decoration: none; transition: color .2s;
+}
+.ft-list a:hover { color: #fff; }
+.ft-contact { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; font-weight: 300; }
+.ft-contact strong { color: rgba(255,255,255,.3); font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; margin-top: 12px; }
+.ft-contact a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; }
+.ft-base {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px;
+}
+.ft-copy-text { font-size: .72rem; font-weight: 300; color: rgba(255,255,255,.28); }
+.ft-copy-text em { font-style: normal; color: rgba(255,255,255,.45); }
+.ft-social { display: flex; gap: 12px; }
+.ft-soc {
+  width: 32px; height: 32px; border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; color: rgba(255,255,255,.4); text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.ft-soc:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .pg-nav { padding: 0 24px; }
+  .pg-nav-links { display: none; }
+  .pg-hero { padding: 56px 24px 48px; }
+  .faq-outer { padding: 48px 24px 72px; }
+  .faq-contact-nudge { flex-direction: column; padding: 32px 28px; }
+  .ft-main { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 480px) {
+  .ft-main { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<script src="components.js"></script>
+
+<!-- HERO -->
+<section class="pg-hero">
+  <div class="pg-hero-label">Support &amp; Clarity</div>
+  <h1 class="pg-hero-title">Frequently Asked<br><em>Questions</em></h1>
+  <p class="pg-hero-sub">Everything you need to know about working with Innsæi Global Tech — answered clearly, honestly, and without the jargon.</p>
+</section>
+
+<!-- FAQ BODY -->
+<main class="faq-outer">
+
+  <div class="faq-ask-bar" onclick="window.location='contact.html'">
+    <div class="faq-ask-icon">?</div>
+    <span class="faq-ask-text">Can't find what you're looking for? Send us your question directly.</span>
+    <span class="faq-ask-arrow">Ask →</span>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="faq-section-label">About Innsæi</div>
+
+  <div class="faq-item open">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">What is Innsæi Global Tech?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Innsæi Global Tech is a forward-focused consulting firm specialising in staffing and recruitment solutions for IT and non-IT professionals. We have built a reputation as a trusted partner in the industry, delivering tailored career opportunities across a wide range of technology and business domains.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Where is Innsæi Global Tech based?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Our primary office is located in the United States, with a dedicated operational hub in India that supports our global staffing and recruitment services around the clock.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Who leads the operations at Innsæi Global Tech?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Since our founding, Innsæi has been led by an experienced leadership team committed to building genuine, lasting connections with both clients and candidates. Our directors bring deep industry knowledge and a hands-on approach to every engagement, ensuring consistently high-quality outcomes.</p>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="faq-section-label" style="margin-top:56px;">Our Services</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">What roles and technologies does Innsæi Global Tech specialise in?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-text">
+        <p>We place professionals across a broad spectrum of IT disciplines, including:</p>
+        <ul>
+          <li>DevOps Engineers &amp; Site Reliability Engineers (SRE)</li>
+          <li>Software Engineers — Full Stack, Front-End, .NET, Python, Java</li>
+          <li>Data Scientists &amp; Business Analysts</li>
+          <li>Cybersecurity &amp; SOC Analysts</li>
+          <li>Cloud Engineers — AWS, Azure, GCP</li>
+          <li>QA Automation &amp; Manual Testing</li>
+          <li>Salesforce Administrators &amp; Developers</li>
+          <li>Business Intelligence &amp; AI Engineers</li>
+          <li>Network Engineers, UI/UX Designers, Project Managers, and more</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Does Innsæi offer remote job opportunities in the USA?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Yes. We place candidates in remote, hybrid, and onsite roles across the United States, giving both professionals and client organisations the flexibility to find arrangements that genuinely work for them.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Does Innsæi place candidates in full-time positions?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Absolutely. Innsæi Global Tech specialises in permanent full-time placements, W2 engagements, and long-term contractual IT roles — structured to give candidates genuine stability and career progression.</p>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="faq-section-label" style="margin-top:56px;">Results &amp; Reliability</div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">How dependable is Innsæi Global Tech?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Innsæi maintains a 9-out-of-10 placement success ratio, reflecting our commitment to quality, preparation, and genuine care for every candidate we work with. Our track record speaks for itself.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">How long does it typically take to secure a role through Innsæi?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Most candidates who engage with our full-service process land their target role within 35 to 45 days. Our structured approach — covering profile optimisation, targeted outreach, interview preparation, and offer management — is specifically designed to compress that timeline without cutting corners.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">What is Innsæi's overall success rate?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">Innsæi Global Tech consistently delivers a 90% placement success rate, positioning us among the top-performing staffing and recruitment firms in the industry. We are proud of this number — and equally committed to improving it further.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Are Innsæi's services genuinely worth it?</span>
+      <span class="faq-q-icon">+</span>
+    </div>
+    <div class="faq-a">
+      <p class="faq-a-text">We are entirely focused on delivering premium outcomes for every person we represent. Our dedication to thorough preparation, transparent communication, and lasting relationships makes us a consistently preferred partner for both candidates and hiring organisations. We don't treat placements as transactions — we treat them as careers.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT NUDGE -->
+  <div class="faq-contact-nudge">
+    <p class="faq-nudge-copy">Still have questions? <em>We'd love to hear from you.</em><br>Our team typically responds within one business day.</p>
+    <a href="contact.html" class="faq-nudge-btn">Get In Touch</a>
+  </div>
+
+</main>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+function toggle(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+<script src="site.js"></script>
+</body>
+</html>
